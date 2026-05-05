@@ -12,8 +12,8 @@ Nesta etapa, o foco é a consolidação de conhecimentos em frameworks modernos,
 * [✨ Novas Funcionalidades](#-novas-funcionalidades)
 * [📐 Arquitetura e Estrutura](#-arquitetura-e-estrutura)
 * [📅 Cronograma de 8 Semanas](#-cronograma-de-8-semanas)
-* [🚀 Como Executar o Projeto](-#como-executar-o-projeto)
-* [👥 Envolvidos](-#envolvidos)
+* [🚀 Como Executar o Projeto](#-como-executar-o-projeto)
+* [👥 Envolvidos](#-envolvidos)
 
 ---
 
