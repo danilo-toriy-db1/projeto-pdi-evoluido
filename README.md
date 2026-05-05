@@ -1,4 +1,4 @@
-# 🚀 Evolução da Landing Page: Fase 2 (Angular + TypeScript)
+# 🚀 Evolução da Landing Page (Angular + TypeScript)
 
 Este projeto marca a segunda fase do meu Plano de Desenvolvimento Individual (PDI), com o objetivo de evoluir uma Landing Page estática (anteriormente feita em HTML, CSS e JS puros) para uma aplicação robusta, dinâmica e gerenciável.
 
