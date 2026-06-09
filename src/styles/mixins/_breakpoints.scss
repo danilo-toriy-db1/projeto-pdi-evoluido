@@ -1,0 +1,14 @@
+$tablet: 768px;
+$computador: 1025px;
+
+@mixin responsivo($tamanho) {
+  @if $tamanho == 'tablet' {
+    @media (min-width: $tablet) and (max-width: ($computador - 1px)) { @content; }
+  } 
+  @else if $tamanho == 'computador' {
+    @media (min-width: $computador) { @content; }
+  }
+  @else if $tamanho == 'celular' {
+    @media (max-width: ($tablet - 1px)) { @content }
+  }
+}

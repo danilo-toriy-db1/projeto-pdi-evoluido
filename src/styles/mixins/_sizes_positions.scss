@@ -1,0 +1,9 @@
+@mixin sizes_positions($width: 1rem, $height: 1rem, 
+                    $top: auto, $left: auto, $bottom: auto, $right: auto){
+    width: $width;
+    height: $height;
+    top: $top;
+    left: $left;
+    bottom: $bottom;
+    right: $right;
+}

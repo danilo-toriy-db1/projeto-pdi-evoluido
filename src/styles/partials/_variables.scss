@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Dancing+Script:wght@400..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+:root {
+    --background-header: #6c558a;
+    --backgound-footer: #6c558a;
+    --background-main: linear-gradient(
+                        50deg,
+                        rgba(190, 173, 204, 1) 0%, 
+                        rgba(147, 103, 171, 1) 27%, 
+                        rgba(148, 93, 212, 1) 55%, 
+                        rgba(227, 176, 255, 1) 94%);
+
+    --color-card: #e2dedeea;
+
+    --text-font: "Lato", Sans-Serif;
+    --text-font-secundary: "Comic Neue", Sans-Serif;
+    --cursive-font: "Dancing Script", Sans-Serif;
+
+    --white-text: #FFFFFF;
+    --gray-text: #2b2e2c;
+
+}
+
+/*If/else para modo escuro*/
+.dark-mode{
+    --background-header: rgba(50, 10, 10, 0.2);
+    --backgound-footer: #1d0b35e0;
+    --background-main: linear-gradient(
+                        50deg, 
+                        rgba(2, 0, 36, 1) 0%, 
+                        rgba(12, 12, 79, 1) 27%, 
+                        rgba(70, 69, 133, 1) 55%, 
+                        rgba(35, 10, 64, 1) 94%);
+
+    --color-card: #090816;
+
+    --text-font: "Lato", Sans-Serif;
+    --text-font-secundary: "Comic Neue", Sans-Serif;
+    --cursive-font: "Dancing Script", Sans-Serif;
+
+    --white-text: #eeeef067;
+    --gray-text: #c8d7eead;
+}

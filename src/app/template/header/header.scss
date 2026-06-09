@@ -1,0 +1,132 @@
+@use 'mixins/breakpoints' as *;
+@use 'mixins/flexbox' as *;
+@use 'mixins/grid' as *;
+@use 'mixins/sizes_positions' as *;
+
+#cabecalho{
+    background-color: var(--background-header);
+
+    @include responsivo('computador'){
+        top: 0;
+        width: 100vw;
+        @include grid(45% 55%, none, "navbar themeButton");
+        backdrop-filter: blur(2px);
+    }
+
+    @include responsivo('tablet'){
+        width: 100vw;
+        @include grid(70% 30%, none, "navbar themeButton");
+        background-color: var(--background-header);
+        backdrop-filter: blur(2px);
+    }
+
+    @include responsivo('celular'){
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background-color: var(--background-header);
+        backdrop-filter: blur(40px);
+        transform: translateX(-100%);
+        transition: transform 0.2s ease-in-out;
+        z-index: 10;
+    }
+}
+
+#navbar{
+
+    @include responsivo('computador'){
+        @include flexbox(space-between, center, row);
+        padding: 0.5rem 0 0.5rem 0;
+        margin-left: 1.5rem;
+
+        a{
+            font-family: var(--text-font);
+            text-decoration: none;
+        }
+    }
+
+    @include responsivo('tablet'){
+        @include flexbox(space-between, center, row);
+        padding: 0.75rem 0 0.75rem 0;
+
+        a{
+            font-family: var(--text-font);
+            text-decoration: none;
+            font-size: 1.25rem;
+        }
+    }
+
+    @include responsivo('celular'){
+        @include flexbox(flex-start, stretch, column);
+        padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+        gap: 2rem;
+
+        a{
+            font-family: var(--text-font);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+    }
+
+    &hover{
+            color: var(--background-footer);
+            cursor: pointer;
+    }
+}
+
+#navbar__menu--collapsed, #navbar__menu{
+    display: none;
+}
+
+.menu__container{
+    display: none;
+}
+
+#initial__page{
+    margin-left: 5%;
+}
+
+#button__container{
+    @include flexbox(right, center, none);
+
+    @include responsivo('celular'){
+        @include flexbox(center, center, none);
+    }
+}
+
+#themeButton{
+    @include sizes_positions(max-content, max-content);
+    padding: 0.25rem;
+    border: 0;
+    background-color: transparent;
+
+    @include responsivo('computador'){
+        margin: 0 13rem 0 0;
+    }
+
+    @include responsivo('tablet'){
+        margin: 0 7.5rem 0 0;
+    }
+
+    @include responsivo('celular'){
+        margin: 2rem 0 0 0;
+        display: flex;
+        align-self: center;
+    }
+}
+
+#img-theme{
+    @include responsivo('computador'){
+        @include sizes_positions(1.8rem, 1.8rem);
+    }
+
+    @include responsivo('tablet'){
+        @include sizes_positions(2rem, 2rem);
+    }
+
+    @include responsivo('celular'){
+        @include sizes_positions(1.5rem, 1.5rem);
+    }
+}

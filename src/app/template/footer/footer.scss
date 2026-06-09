@@ -1,0 +1,11 @@
+#rodape{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--backgound-footer);
+    color: var(--white-text);
+    font-family: var(--text-font);
+    margin: 0;
+    width: 100vw;
+}
