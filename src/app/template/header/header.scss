@@ -7,25 +7,20 @@
     background-color: var(--background-header);
 
     @include responsivo('computador'){
-        top: 0;
-        width: 100vw;
+        @include sizes_positions($width: 100vw, $top: 0);
         @include grid(45% 55%, none, "navbar themeButton");
         backdrop-filter: blur(2px);
     }
 
     @include responsivo('tablet'){
-        width: 100vw;
+        @include sizes_positions($width: 100vw);
         @include grid(70% 30%, none, "navbar themeButton");
-        background-color: var(--background-header);
         backdrop-filter: blur(2px);
     }
 
     @include responsivo('celular'){
         position: fixed;
-        top: 0;
-        left: 0;
-        height: 100%;
-        background-color: var(--background-header);
+        @include sizes_positions($height: 100%, $top: 0, $left:0);
         backdrop-filter: blur(40px);
         transform: translateX(-100%);
         transition: transform 0.2s ease-in-out;
@@ -70,9 +65,12 @@
         }
     }
 
-    &hover{
+    a{
+        cursor: pointer;
+        
+        &:hover{
             color: var(--background-footer);
-            cursor: pointer;
+        }
     }
 }
 
@@ -101,6 +99,7 @@
     padding: 0.25rem;
     border: 0;
     background-color: transparent;
+    position: absolute;
 
     @include responsivo('computador'){
         margin: 0 13rem 0 0;
@@ -114,6 +113,23 @@
         margin: 2rem 0 0 0;
         display: flex;
         align-self: center;
+    }
+
+    &:hover{
+        cursor: pointer;
+
+        &::after{
+            content: 'Alterar tema da página';
+            position: absolute;
+            background-color: var(--color-card);
+            color: var(--gray-text);
+            font-family: var(--text-font-secundary);
+            z-index: 10;
+            @include sizes_positions($width:max-content, $top: 90%, $left: -150%, $right: 0);
+            border-radius: 1rem;
+            padding: 0.35rem;
+            font-size: 0.85rem;
+        }
     }
 }
 

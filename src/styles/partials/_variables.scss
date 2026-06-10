@@ -2,7 +2,7 @@
 
 :root {
     --background-header: #6c558a;
-    --backgound-footer: #6c558a;
+    --background-footer: #664c86;
     --background-main: linear-gradient(
                         50deg,
                         rgba(190, 173, 204, 1) 0%, 
@@ -24,7 +24,7 @@
 /*If/else para modo escuro*/
 .dark-mode{
     --background-header: rgba(50, 10, 10, 0.2);
-    --backgound-footer: #1d0b35e0;
+    --background-footer: #1d0b35e0;
     --background-main: linear-gradient(
                         50deg, 
                         rgba(2, 0, 36, 1) 0%, 

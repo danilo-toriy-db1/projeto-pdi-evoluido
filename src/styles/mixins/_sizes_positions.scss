@@ -1,4 +1,4 @@
-@mixin sizes_positions($width: 1rem, $height: 1rem, 
+@mixin sizes_positions($width: auto, $height: auto, 
                     $top: auto, $left: auto, $bottom: auto, $right: auto){
     width: $width;
     height: $height;

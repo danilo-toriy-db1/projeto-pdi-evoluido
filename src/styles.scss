@@ -1,2 +1,7 @@
 @use './styles/partials/variables';
 @use './styles/mixins/breakpoints';
+
+* {
+    margin: 0;
+    padding: 0;
+}
