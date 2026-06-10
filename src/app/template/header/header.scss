@@ -74,7 +74,11 @@
     }
 }
 
-#navbar__menu--collapsed, #navbar__menu{
+#navbar__menu--collapsed {
+    display: none;
+}
+
+#navbar__menu{
     display: none;
 }
 

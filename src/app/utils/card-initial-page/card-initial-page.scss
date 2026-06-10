@@ -1,0 +1,69 @@
+@use 'mixins/flexbox' as *;
+@use 'mixins/grid' as *;
+@use 'mixins/sizes_positions' as *;
+
+@keyframes brilho {
+    0% {transform: translateX(-60%) rotate(45deg);}
+    100% {transform: translateX(60%) rotate(45deg);}
+}
+
+#cards{
+    @include flexbox(space-between, center, row);
+    margin: 7rem 10rem 2rem 10rem ;
+}
+
+.cards__container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: var(--background-main);
+}
+
+
+.card__item{
+    position: relative;
+    padding: 2rem;
+    background-color: var(--color-card);
+    border-radius: 1rem;
+    margin: 0 2rem 0 2.5rem;
+
+    text-align: justify;
+    color: var(--gray-text);
+    font-family: var(--text-font-secundary);
+    font-weight: 800;
+
+    overflow: hidden;
+    box-shadow: 0.6rem 0.5rem 1rem 0.5rem var(--card-box-shadow);
+
+    img{
+        width: 4rem;
+        height: 4rem;
+        margin: 0 0 1.25rem 0;
+    }
+
+    &:hover{
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+
+    &::after{
+        content: '';
+        position: absolute;
+        @include sizes_positions($width: 200%, $height: 200%, $top: 0);
+        background: var(--brilho-card);
+        animation: brilho 3s ease-in-out infinite;
+    }
+
+    &::before{
+        content: '';
+        position: absolute;
+        @include sizes_positions(auto, 0.05rem, 0.5%, 0, 0, 0);
+        background: var(--linha-card);
+    }
+}
+
+#card-1, #card-2, #card-3{
+    @include flexbox(center, center, column);
+
+    text-decoration: none;
+    box-sizing: border-box;
+}

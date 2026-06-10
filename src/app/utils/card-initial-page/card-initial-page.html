@@ -1,0 +1,11 @@
+<section id="cards">
+    <div class="cards__container">
+        @for (card of cards; track card) {
+            <a class="card__item" 
+            [id]="card.id" 
+            [attr.href]="card.href" 
+            [attr.target]="card.target" 
+            [innerHTML]="card.content"></a>
+        }
+    </div>
+</section>

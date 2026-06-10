@@ -1,4 +1,12 @@
+@use 'mixins/flexbox' as *;
+
 * {
     margin: 0;
     padding: 0;
+}
+
+body {
+    @include flexbox(center, center, column);
+    overflow-x: hidden;
+    background: var(--background-main);
 }
