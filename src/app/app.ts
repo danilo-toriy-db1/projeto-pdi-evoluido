@@ -3,13 +3,20 @@ import { RouterOutlet } from '@angular/router';
 import { Header } from './template/header/header';
 import { Footer } from './template/footer/footer';
 import { InitialPage } from './pages/initial-page/initial-page';
+import { AboutMePage } from "./pages/about-me-page/about-me-page";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Footer, InitialPage],
+  imports: [RouterOutlet, Header, Footer, InitialPage, AboutMePage],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
   protected readonly title = signal('projeto-angular-pdi');
+
+  paginaAtual = signal('home');
+
+  trocaPagina(pagina: string){
+    this.paginaAtual.set(pagina);
+  }
 }
