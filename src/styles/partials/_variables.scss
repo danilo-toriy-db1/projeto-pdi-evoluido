@@ -35,9 +35,25 @@
 
     --card-box-shadow: rgba(28, 2, 58, 0.75);
 
+    --hard-skill-background: whitesmoke;
+    --soft-skill-background: whitesmoke;
+    --container-background: #d2baf8;
+
+    --hard-skill-border: #e73a3a;
+    --soft-skill-border: #021373;
+
+    --dashed-line-color: #616161;
+
+    --duration-animation-linha-principal: 2s;
+    --duration-animation-linha-galho: 2s;
+    --duration-animation-fadeIn: 2s;
+    --duration-animation-pintar-card: 2s;
+    --delay-galho-animation: 2s;
+    --delay-fadeIn: 4s;
+    --delay-pintar-card: 4s;
+
 }
 
-/*If/else para modo escuro*/
 .dark-mode{
     --background-header: rgba(50, 10, 10, 0.2);
     --background-footer: #1d0b35e0;
@@ -49,10 +65,6 @@
                         rgba(35, 10, 64, 1) 94%);
 
     --color-card: #090816;
-
-    --text-font: "Lato", Sans-Serif;
-    --text-font-secundary: "Comic Neue", Sans-Serif;
-    --cursive-font: "Dancing Script", Sans-Serif;
 
     --white-text: #eeeef067;
     --gray-text: #c8d7eead;
@@ -72,4 +84,7 @@
                     );
     
     --card-box-shadow: rgba(23, 9, 39, 0.75);
+
+    --container-background: #0e051c;
+    --dashed-line-color: #ccc;
 }

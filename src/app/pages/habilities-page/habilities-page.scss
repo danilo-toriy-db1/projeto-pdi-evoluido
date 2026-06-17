@@ -1,0 +1,144 @@
+@use 'mixins/breakpoints' as *;
+@use 'mixins/flexbox' as *;
+@use 'mixins/sizes_positions' as *;
+
+@keyframes linha_principal {
+    100% { height: 98%; }
+}
+
+@keyframes linha_galho{
+    100% { width: 3.8rem; }
+}
+
+@keyframes linha_galho_mobile{
+    100% { width: 1.8rem; }
+}
+
+@keyframes pintar_card_soft{
+    100% { background-color: var(--soft-skill-background);
+           border-color: var(--soft-skill-border); }
+}
+
+@keyframes pintar_card_hard{
+    100% { background-color: var(--hard-skill-background);
+           border-color: var(--hard-skill-border); }
+}
+
+#habilidades{
+    @include flexbox($direction: column);
+    @include sizes_positions($width: 100vw);
+    background-color: var(--background-main);
+    margin: 3rem 0 0 0;
+
+    @include responsivo('computador'){
+        min-height: 87vh;
+    }
+
+    @include responsivo('tablet'){
+        min-height: 90vh;
+    }
+
+    @include responsivo('celular'){
+        min-height: 90vh;
+    }
+}
+
+.habilidades__title{
+    font-family: var(--cursive-font);
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#habilidades__cards--container{
+    position: relative;
+    margin: 0 auto;
+    padding: 2.5rem 0;
+    background-color: var(--container-background);
+    border: var(--container-background) 0.1rem solid;
+    border-radius: 1rem;
+
+    @include responsivo('computador'){
+        @include sizes_positions($width: 70vw);
+    }
+
+    @include responsivo('tablet'){
+        @include sizes_positions($width: 70vw);
+    }
+
+    @include responsivo('celular'){
+        @include sizes_positions($width: 90vw);
+    }
+
+    &::after{
+        content: '';
+        @include sizes_positions($left: 50%, $top: 0.25rem, $height: 0);
+        position: absolute;
+        border-right: var(--dashed-line-color) 0.15rem dashed;
+        z-index: 1;
+        animation: linha_principal var(--duration-animation-linha-principal) ease-in-out forwards;
+    }
+}
+
+.button__excludeHability{
+    display: none;
+    position: absolute;
+    border: none;
+    background-color: red;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.hard-skill .button__excludeHability{
+    @include sizes_positions($top: -0.7rem, $right: -0.7rem);
+}
+
+.soft-skill .button__excludeHability{
+    @include sizes_positions($top: -0.7rem, $right: -0.7rem);
+}
+
+.modo-exclusao .button__excludeHability{
+    display: flex;
+}
+
+.button__container{
+    @include flexbox($justify: space-evenly, $direction: row);
+    margin: 2rem 0 2rem 0;
+}
+
+#button__openPopUp, #button__removeHability{
+    @include flexbox(space-between, center, row);
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    text-align: center;
+    font-family: var(--text-font-secondary);
+    font-weight: 300;
+    font-size: 1.1rem;
+
+    @include responsivo('computador'){
+        padding: 1.25rem 3rem 1.25rem 3rem;
+    }
+
+    @include responsivo('tablet'){
+        padding: 1rem 2rem 1rem 2rem;
+    }
+
+    @include responsivo('celular'){
+        padding: 0.5rem 1rem 0.5rem 1rem;
+    }
+
+    &:hover{
+        transform: scale(1.1);
+    }
+}
+
+#icon__img--remove, #icon__img--add{
+    margin-right: 0.5rem;
+}
+
+.selecionado-exclusao{
+    background-color: rgb(235, 101, 101);
+    border-radius: 0.5rem;
+    border: red solid 0.2rem;
+}

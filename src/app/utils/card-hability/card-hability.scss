@@ -1,0 +1,188 @@
+@use 'mixins/breakpoints' as *;
+@use 'mixins/flexbox' as *;
+@use 'mixins/sizes_positions' as *;
+
+@keyframes fadeIn{
+    100% {  visibility: visible;
+            opacity: 1; }
+}
+
+@keyframes linha_galho{
+    100% { width: 3.8rem; }
+}
+
+@keyframes pintar_card_soft{
+    100% { background-color: var(--soft-skill-background);
+           border-color: var(--soft-skill-border); }
+}
+
+@keyframes pintar_card_hard{
+    100% { background-color: var(--hard-skill-background);
+           border-color: var(--hard-skill-border); }
+}
+
+.habilidade__type{
+    @include sizes_positions($width: 50%);
+    position: relative;
+    padding: 0.5rem 1rem;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.habilidade__content{
+    @include sizes_positions($width: max-content);
+    position: relative;
+
+    @include responsivo('computador'){
+        padding: 0.75rem 0.25rem 0.75rem 0.25rem;
+        min-width: 11.5rem;
+    }
+
+    @include responsivo('tablet'){
+        padding: 0.75rem 0.25rem 0.75rem 0.25rem;
+        min-width: 11.5rem;
+    }
+
+    @include responsivo('celular'){
+        @include flexbox($justify: center);
+        padding: 0.5rem 0.15rem 0.5rem 0.15rem;
+        min-width: 7.5rem;
+    }
+
+    h3{
+        animation: fadeIn var(--duration-animation-fadeIn) ease-in-out forwards;
+        animation-delay: var(--delay-fadeIn);
+        text-align: center;
+        visibility: hidden;
+        opacity: 0;
+    
+        @include responsivo('computador'){
+            @include sizes_positions($width: 100%);
+        }
+
+        @include responsivo('tablet'){
+            @include sizes_positions($width: 100%);
+        }
+
+        @include responsivo('celular'){
+            @include sizes_positions($width: max-content);
+            font-size: 1rem;
+        }
+    }
+
+    &::before{
+        content: '';
+        @include sizes_positions($width: 0, $height: 0, $top: 50%);
+        position: absolute;
+        transform: translateY(-50%);
+        border-top: var(--dashed-line-color) dashed 0.15rem;
+        animation: linha_galho var(--duration-animation-linha-galho) ease-in-out forwards;
+        animation-delay: var(--delay-galho-animation);
+    }
+
+    &::after{
+        content: '';
+        @include sizes_positions($width: 0.75rem, $height: 0.75rem, $top: 50%);
+        position: absolute;
+    }
+}
+
+.soft-skill{
+    justify-content: flex-end;
+
+    @include responsivo('computador'){
+        padding-right: 4rem;
+    }
+
+    @include responsivo('tablet'){
+        padding-right: 4rem;
+    }
+
+    @include responsivo('celular'){
+        padding-right: 2rem;
+    }
+    
+    .habilidade__content{
+        animation: pintar_card_soft var(--duration-animation-pintar-card) ease-in-out forwards;
+        animation-delay: var(--delay-pintar-card);
+        background-color: transparent;
+        border-radius: 0.5rem;
+        border: transparent solid 0.2rem;
+
+        &::before{
+            @include responsivo('computador'){
+                @include sizes_positions($right: -4.2rem);
+            }
+
+            @include responsivo('tablet'){
+                @include sizes_positions($right: -4.2rem);
+            }
+
+            @include responsivo('celular'){
+                @include sizes_positions($right: -2.2rem);
+            }
+        }
+
+        &::after{
+            @include sizes_positions($right: -0.5rem);
+            transform: translate(50%, -50%);
+            border-radius: 50%;
+            background-color: var(--dashed-line-color);
+            visibility: hidden;
+            opacity: 0;
+            animation: fadeIn var(--duration-animation-fadeIn) ease-in-out forwards;
+            animation-delay: var(--delay-fadeIn);
+        }
+    }
+}
+
+.hard-skill{
+    justify-content: flex-start;
+    margin-left: 50%;
+
+    @include responsivo('computador'){
+        padding-left: 4rem;
+    }
+
+    @include responsivo('computador'){
+        padding-left: 4rem;
+    }
+    
+    @include responsivo('celular'){
+        padding-left: 2rem;
+    }
+
+    .habilidade__content{
+        animation: pintar_card_hard var(--duration-animation-pintar-card) ease-in-out forwards;
+        animation-delay: var(--delay-pintar-card);
+        background-color: transparent;
+        border-radius: 0.5rem;
+        border: transparent solid 0.2rem;
+
+        &::before{
+            @include responsivo('computador'){
+                @include sizes_positions($left: -4rem);
+            }
+
+            @include responsivo('tablet'){
+                @include sizes_positions($left: -4rem);
+            }
+
+            @include responsivo('celular'){
+                @include sizes_positions($left: -2rem);
+            }
+        }
+
+        &::after{
+            @include sizes_positions($left: -0.5rem);
+            animation: fadeIn var(--duration-animation-fadeIn) ease-in-out forwards;
+            animation-delay: var(--delay-fadeIn);
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background-color: var(--dashed-line-color);
+
+            visibility: hidden;
+            opacity: 0;
+        }
+    }
+}

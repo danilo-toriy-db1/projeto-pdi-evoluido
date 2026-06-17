@@ -1,0 +1,8 @@
+@for (habilities of cardsHabilities; track habilities) {
+    <div class="habilidade__type" [class]="habilities.habilidade.tipo">
+        <div class="habilidade__content" [id]="habilities.id">
+            <h3> {{ habilities.habilidade.habilidade }} </h3>
+            <app-button-exclude-hability />
+        </div>
+    </div>
+}
