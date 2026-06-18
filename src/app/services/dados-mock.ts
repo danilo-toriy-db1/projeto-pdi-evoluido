@@ -30,7 +30,7 @@ export class DadosMock {
       id: 'card-1',
       href: 'https://github.com/danilo-toriy-db1/projeto-pdi/tree/upstream',
       target: '_blank',
-      content: `<img src="./assets/icons/github-icon.svg" id="card__item--github">
+      content: `<img src="assets/icons/github-icon.svg" id="card__item--github">
         <p class="card__item--text">
             Esse projeto foi desenvolvido usando HTML, CSS e JavaScript.
             Cada Commit e Pull Request foi registrado no Github pessoal
@@ -43,7 +43,7 @@ export class DadosMock {
       id: 'card-2',
       href: null,
       target: null,
-      content: `<img src="./assets/icons/add-icon.svg" id="card__item--add">
+      content: `<img src="assets/icons/add-icon.svg" id="card__item--add">
           <p class="card__item--text">
               Caso deseje criar uma página de apresentação pessoal, o projeto
               foi desenvolvido de forma que possa ser replicado via código ou 
@@ -54,7 +54,7 @@ export class DadosMock {
       id: 'card-3',
       href: null,
       target: null,
-      content: `<img src="./assets/icons/change-icon.svg" id="card__item--mode">
+      content: `<img src="assets/icons/change-icon.svg" id="card__item--mode">
           <p class="card__item--text">
               O Projeto foi desenvolvido para ser responsivo, ou seja, se adaptando
               a diferentes tipos de telas. Além disso, ela possui troca entre modo
@@ -100,7 +100,7 @@ export class DadosMock {
   contactPage: contactPageModel[] = [
     {
       type: TipoContactPage.TECNOLOGIA,
-      srcImg: "./assets/icons/html-icon.svg",
+      srcImg: "assets/icons/html-icon.svg",
       altImg: "Ícone do HTML",
       idImg: "html-icon",
       spanId: "html",
@@ -110,7 +110,7 @@ export class DadosMock {
     },
     {
       type: TipoContactPage.TECNOLOGIA,
-      srcImg: "./assets/icons/css-icon.svg",
+      srcImg: "assets/icons/css-icon.svg",
       altImg: "Ícone do CSS",
       idImg: "css-icon",
       spanId: "css",
@@ -120,7 +120,7 @@ export class DadosMock {
     },
     {
       type: TipoContactPage.TECNOLOGIA,
-      srcImg: "./assets/icons/javascript-icon.svg",
+      srcImg: "assets/icons/javascript-icon.svg",
       altImg: "Ícone do JavaScript",
       idImg: "javascript-icon",
       spanId: "js",
@@ -130,7 +130,7 @@ export class DadosMock {
     },
     {
       type: TipoContactPage.VERSIONAMENTO,
-      srcImg: "./assets/icons/git-icon.svg",
+      srcImg: "assets/icons/git-icon.svg",
       altImg: "Ícone do Git",
       idImg: "git-icon",
       spanId: "git",
@@ -140,7 +140,7 @@ export class DadosMock {
     },
     {
       type: TipoContactPage.VERSIONAMENTO,
-      srcImg: "./assets/icons/github-icon.svg",
+      srcImg: "assets/icons/github-icon.svg",
       altImg: "Ícone do GitHub",
       idImg: "github-icon",
       spanId: "github",
@@ -150,7 +150,7 @@ export class DadosMock {
     },
     {
       type: TipoContactPage.GESTAO,
-      srcImg: "./assets/icons/azure-devops-icon.svg",
+      srcImg: "assets/icons/azure-devops-icon.svg",
       altImg: "Ícone do Azure DevOps",
       idImg: "azure-devops-icon",
       spanId: "azure",
@@ -160,7 +160,7 @@ export class DadosMock {
     },
     {
       type: TipoContactPage.GESTAO,
-      srcImg: "./assets/icons/excalidraw-icon.svg",
+      srcImg: "assets/icons/excalidraw-icon.svg",
       altImg: "Ícone do Excalidraw",
       idImg: "excalidraw-icon",
       spanId: "excalidraw",
@@ -170,7 +170,7 @@ export class DadosMock {
     },
     {
       type: TipoContactPage.CONTATO,
-      srcImg: "./assets/icons/email-icon.svg",
+      srcImg: "assets/icons/email-icon.svg",
       altImg: "Ícone de Email",
       idImg: "contact__email",
       spanId: null,
@@ -185,7 +185,7 @@ export class DadosMock {
     },
     {
       type: TipoContactPage.CONTATO,
-      srcImg: "./assets/icons/github-icon.svg",
+      srcImg: "assets/icons/github-icon.svg",
       altImg: "Ícone do Github",
       idImg: "contact__github",
       spanId: null,
