@@ -5,10 +5,11 @@ import { Footer } from './template/footer/footer';
 import { InitialPage } from './pages/initial-page/initial-page';
 import { AboutMePage } from "./pages/about-me-page/about-me-page";
 import { HabilitiesPage } from "./pages/habilities-page/habilities-page";
+import { ContactPage } from "./pages/contact-page/contact-page";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Footer, InitialPage, AboutMePage, HabilitiesPage],
+  imports: [RouterOutlet, Header, Footer, InitialPage, AboutMePage, HabilitiesPage, ContactPage],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

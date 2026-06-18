@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { ArrayHabilitiesModel } from '../../models/array-habilities.model';
 import { DadosMock } from '../../services/dados-mock';
 import { ButtonExcludeHability } from "../button-exclude-hability/button-exclude-hability";
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-card-hability',
-  imports: [ButtonExcludeHability],
+  imports: [ButtonExcludeHability, NgClass],
   templateUrl: './card-hability.html',
   styleUrl: './card-hability.scss',
 })

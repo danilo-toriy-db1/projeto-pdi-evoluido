@@ -1,5 +1,5 @@
-@mixin sizes_positions($width: auto, $height: auto, 
-                    $top: auto, $left: auto, $bottom: auto, $right: auto){
+@mixin sizes_positions($width: null, $height: null, 
+                    $top: null, $left: null, $bottom: null, $right: null){
     width: $width;
     height: $height;
     top: $top;

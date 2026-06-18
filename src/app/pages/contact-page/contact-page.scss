@@ -1,0 +1,86 @@
+@use 'mixins/breakpoints' as *;
+@use 'mixins/flexbox' as *;
+@use 'mixins/sizes_positions' as *;
+
+img{
+    @include sizes_positions($width: 2rem, $height: 2rem);
+}
+
+ul{
+    list-style: none;
+
+    @include responsivo('tablet'){
+        padding: 0;
+        margin: 0;
+    }
+
+    @include responsivo('celular'){
+        padding: 0;
+        margin: 0;
+    }
+}
+
+#about{
+    @include flexbox($justify: center, $align: center);
+    font-family: var(--text-font-secundary);
+    color: var(--gray-text);
+
+    @include responsivo('computador'){
+        @include sizes_positions($width: 100vw, $height: max-content);
+        font-size: 1.35rem;
+    }
+    
+    @include responsivo('tablet'){
+        @include sizes_positions($width: 100vw);
+        font-size: 1.5rem;
+    }
+
+    @include responsivo('celular'){
+        @include sizes_positions($width: 100vw);
+        font-size: 1.2rem;
+    }
+}
+
+.about__container{
+    @include responsivo('computador'){
+        @include sizes_positions($width: 65vw);
+        margin-top: 1.5rem;
+    }
+
+    @include responsivo('tablet'){
+        @include sizes_positions($width: 65vw);
+        @include flexbox($justify: center, $direction: column);
+        margin-top: 1.5rem;
+    }
+
+    @include responsivo('celular'){
+        @include sizes_positions($width: 80vw);
+        @include flexbox($justify: center, $direction: column);
+        margin-top: 2rem;
+    }
+
+    hr {
+        margin: 1rem 0 2rem 0;
+
+        @include responsivo('tablet'){
+            @include sizes_positions($width: 100%);
+        }
+
+        @include responsivo('celular'){
+            @include sizes_positions($width: 100%);
+        }
+    }
+}
+
+
+.tecnologia__item, .gestao__item, .versionamento__item {
+    @include flexbox($align: center, $direction: row);
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+
+    p{    
+        @include sizes_positions($width: 100%)
+        
+    }
+}

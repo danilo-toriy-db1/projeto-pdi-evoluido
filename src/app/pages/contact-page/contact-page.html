@@ -1,0 +1,53 @@
+<section id="about">
+    <div class="about__container">
+        <p>Essa página foi desenvolvida usando as seguintes tecnologias: </p>
+        <br>
+
+        <ul id="lista__tecnologias">
+            @for (item of tecnologia; track $index) {
+                <li class="tecnologia__item">
+                    <img [src]="item.srcImg" 
+                         [alt]="item.altImg"
+                         [id]="item.idImg">
+                    <span [id]="item.spanId"> {{ item.spanContent }}</span>
+                </li>
+            }
+        </ul>
+        <br>
+        <hr>
+
+        <p>Além disso, para Repositório do projeto, foram utilizados: </p>
+        <br>
+
+        <ul id="lista__versionamento">
+            @for (item of versionamento; track $index) {
+                <li class="versionamento__item">
+                    <img [src]="item.srcImg" 
+                         [alt]="item.altImg"
+                         [id]="item.idImg">
+                    <span [id]="item.spanId"> {{ item.spanContent }}</span>
+                    <p> {{ item.text }} </p>
+                    <br>
+                </li>
+            }
+        </ul>
+        <hr>
+
+        <p>Para controle e gestão, foram usados: </p>
+        <br>
+
+        <ul id="lista__gestao">
+            @for (item of gestao; track $index) {
+                <li class="gestao__item">
+                    <img [src]="item.srcImg" 
+                         [alt]="item.altImg"
+                         [id]="item.idImg">
+                    <span [id]="item.spanId"> {{ item.spanContent }}</span>
+                    <p> {{ item.text }} </p>
+                </li>
+            }
+        </ul>
+    </div>
+</section>
+
+<app-contact-section [dadosContato]="contato" />

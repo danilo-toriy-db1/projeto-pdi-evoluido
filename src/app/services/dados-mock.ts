@@ -3,6 +3,8 @@ import type { AboutModel } from '.././models/about.model.js'
 import type { InitialPageCardsModel } from '.././models/initial-page-cards.model.js';
 import { ArrayHabilitiesModel } from '../models/array-habilities.model.js';
 import { TipoHabilidade } from '../models/enums/tipo-habilidade.js';
+import { contactPageModel } from '../models/contact-page.model.js';
+import { TipoContactPage } from '../models/enums/tipo-contact-page.js';
 
 
 @Injectable({
@@ -93,5 +95,108 @@ export class DadosMock {
         tipo: TipoHabilidade.SOFT
       }
     }
-  ] 
+  ]
+  
+  contactPage: contactPageModel[] = [
+    {
+      type: TipoContactPage.TECNOLOGIA,
+      srcImg: "./assets/icons/html-icon.svg",
+      altImg: "Ícone do HTML",
+      idImg: "html-icon",
+      spanId: "html",
+      spanContent: "HTML",
+      text: null,
+      anchor: null
+    },
+    {
+      type: TipoContactPage.TECNOLOGIA,
+      srcImg: "./assets/icons/css-icon.svg",
+      altImg: "Ícone do CSS",
+      idImg: "css-icon",
+      spanId: "css",
+      spanContent: "CSS",
+      text: null,
+      anchor: null
+    },
+    {
+      type: TipoContactPage.TECNOLOGIA,
+      srcImg: "./assets/icons/javascript-icon.svg",
+      altImg: "Ícone do JavaScript",
+      idImg: "javascript-icon",
+      spanId: "js",
+      spanContent: "JavaScript",
+      text: null,
+      anchor: null
+    },
+    {
+      type: TipoContactPage.VERSIONAMENTO,
+      srcImg: "./assets/icons/git-icon.svg",
+      altImg: "Ícone do Git",
+      idImg: "git-icon",
+      spanId: "git",
+      spanContent: "Git",
+      text: "Para versionamento de código",
+      anchor: null
+    },
+    {
+      type: TipoContactPage.VERSIONAMENTO,
+      srcImg: "./assets/icons/github-icon.svg",
+      altImg: "Ícone do GitHub",
+      idImg: "github-icon",
+      spanId: "github",
+      spanContent: "GitHub",
+      text: "Como Repositório do Projeto",
+      anchor: null
+    },
+    {
+      type: TipoContactPage.GESTAO,
+      srcImg: "./assets/icons/azure-devops-icon.svg",
+      altImg: "Ícone do Azure DevOps",
+      idImg: "azure-devops-icon",
+      spanId: "azure",
+      spanContent: "Azure DevOps",
+      text: "Para controle de requisitos com User Stories e apontamento de horas",
+      anchor: null
+    },
+    {
+      type: TipoContactPage.GESTAO,
+      srcImg: "./assets/icons/excalidraw-icon.svg",
+      altImg: "Ícone do Excalidraw",
+      idImg: "excalidraw-icon",
+      spanId: "excalidraw",
+      spanContent: "Excalidraw",
+      text: "Para backlog e gestão de sprints de forma visual",
+      anchor: null
+    },
+    {
+      type: TipoContactPage.CONTATO,
+      srcImg: "./assets/icons/email-icon.svg",
+      altImg: "Ícone de Email",
+      idImg: "contact__email",
+      spanId: null,
+      spanContent: null,
+      text: null,
+      anchor: {
+        id: "email",
+        href: "mailto:danilo.toriy@db1.com.br",
+        target: null,
+        content: "Email"
+      }
+    },
+    {
+      type: TipoContactPage.CONTATO,
+      srcImg: "./assets/icons/github-icon.svg",
+      altImg: "Ícone do Github",
+      idImg: "contact__github",
+      spanId: null,
+      spanContent: null,
+      text: null,
+      anchor: {
+        id: "github__contact",
+        href: "https://github.com/danilo-toriy-db1",
+        target: "_blank",
+        content: "GitHub" 
+      }
+    }
+  ]
 }

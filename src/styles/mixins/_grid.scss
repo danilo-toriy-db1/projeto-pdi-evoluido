@@ -1,4 +1,4 @@
-@mixin grid($column: 50% 50%, $row: 1fr 1fr, $area: ""){
+@mixin grid($column: null, $row: null, $area: null){
     display: grid;
     grid-template-columns: $column;
     grid-template-rows: $row;

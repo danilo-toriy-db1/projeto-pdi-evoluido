@@ -1,0 +1,90 @@
+@use 'mixins/breakpoints' as *;
+@use 'mixins/flexbox' as *;
+@use 'mixins/sizes_positions' as *;
+
+img{
+    @include sizes_positions($width: 2rem, $height: 2rem);
+}
+
+ul{
+    list-style: none;
+
+    @include responsivo('tablet'){
+        padding: 0;
+        margin: 0;
+    }
+
+    @include responsivo('celular'){
+        padding: 0;
+        margin: 0;
+    }
+}
+
+#contact{
+    @include flexbox($justify: center, $align: center);
+    font-family: var(--text-font-secundary);
+    color: var(--gray-text);
+
+    @include responsivo('computador'){
+        @include sizes_positions($width: 100vw, $height: max-content);
+        font-size: 1.35rem;
+    }
+    
+    @include responsivo('tablet'){
+        @include sizes_positions($width: 100vw);
+        font-size: 1.5rem;
+    }
+
+    @include responsivo('celular'){
+        @include sizes_positions($width: 100vw);
+        font-size: 1.2rem;
+    }
+}
+
+.contact__container{
+    margin: 1.5rem 0 2rem 0;
+
+    @include responsivo('computador'){
+        @include sizes_positions($width: 65vw);
+    }
+
+    @include responsivo('tablet'){
+        @include sizes_positions($width: 65vw);
+    }
+
+    @include responsivo('celular'){
+        @include sizes_positions($width: 80vw)
+    }
+
+    hr{
+        margin: 1rem 0 2rem 0;
+        @include sizes_positions($width: 100%);
+    }
+
+    p{
+        justify-self: center;
+        text-align: center;
+    }
+}
+
+.contato__item{
+    @include flexbox($align: center, $direction: row);
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+
+    p{    
+        @include sizes_positions($width: 100%)
+        
+    }
+}
+
+#lista__contato{
+    @include flexbox(space-evenly, center, row);
+
+    a{
+        color: var(--gray-text);
+    }
+
+}
+

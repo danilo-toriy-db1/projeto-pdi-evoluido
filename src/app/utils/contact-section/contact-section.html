@@ -1,0 +1,26 @@
+<section id="contact">
+    <div class="contact__container">
+        <hr>
+        <p> 
+            Deseja deixar comentários ou feedbacks? <br>
+            Isso é muito importante para o desenvolvimento do projeto e pessoal do desenvolvedor!
+        </p>
+        <br>
+        <br>
+        <ul id="lista__contato">
+            @for (item of dadosContato(); track $index) {
+                <li class="contato__item">
+                    <img [src]="item.srcImg"
+                         [alt]="item.altImg"
+                         [id]="item.idImg">
+                    <a   [id]="item.anchor?.id"
+                         [href]="item.anchor?.href"
+                         [target]="item.anchor?.target">
+                       {{ item.anchor?.content }}   
+                       </a>
+
+                </li>
+            }
+        </ul>
+    </div>
+</section>
