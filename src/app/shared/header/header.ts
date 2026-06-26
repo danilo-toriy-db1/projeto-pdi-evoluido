@@ -1,11 +1,10 @@
 import { Component, input, output } from '@angular/core';
 import { DadosMock } from '../../services/dados-mock';
 import { HeaderAnchorsModel } from '../../models/header-anchors.model';
-import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-header',
-  imports: [NgClass],
+  imports: [],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
@@ -16,7 +15,9 @@ export class Header {
   dadosHeader: HeaderAnchorsModel[];
 
   constructor(private dados: DadosMock){
-    this.dadosHeader = this.dados.headerAnchorContent
+    this.dadosHeader = this.dados.headerAnchorContent.filter((dado) => {
+        return (!dado.admin || dado.admin === null);
+    })
   }
 
 

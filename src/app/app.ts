@@ -1,8 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Footer } from "./template/footer/footer";
-import { Header } from "./template/header/header";
-import { PaginaAtualState } from './services/pagina-atual-state';
+import { Footer } from "./shared/footer/footer";
+import { Header } from "./shared/header/header";
+import { PaginaAtualState } from './services/troca-pagina';
 
 @Component({
   selector: 'app-root',

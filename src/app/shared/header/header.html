@@ -4,10 +4,12 @@
             <span>Fechar Menu</span>
             <a id="navbar__menu"></a>
         </div>
-        <a id="initial__page" (click)="trocarPagina('home')">Página Inicial</a>
-        <a id="about__me" (click)="trocarPagina('about')">Sobre Mim</a>
-        <a id="habilities" (click)="trocarPagina('habilities')">Habilidades</a>
-        <a id="contact__page" (click)="trocarPagina('contact')">Contato e Sobre</a>
+        @for (anchor of dadosHeader; track $index) {
+            <a [id]="anchor.id"
+               (click)="trocarPagina(anchor.name)">
+                {{ anchor.content }}
+            </a>
+        }
     </nav>    
 
     <div id="button__container" class="tooltip__theme">

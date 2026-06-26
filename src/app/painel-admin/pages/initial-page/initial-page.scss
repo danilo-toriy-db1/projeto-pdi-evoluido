@@ -1,0 +1,55 @@
+@use 'mixins/flexbox' as *;
+
+:host {
+  display: block; 
+  width: 100vw;
+  height: 100vh;
+}
+
+.apresentacao__img{
+    @include flexbox(center, center, row);
+    padding: 1rem;
+}
+
+.apresentacao__text{
+    @include flexbox(center, center, column);
+}
+
+#img-logo{
+    margin: 1rem 0 0 0.5rem;
+    width: 9rem;
+    border-radius: 1rem;
+    background-color: var(--color-card);
+}
+
+.apresentacao__title{
+    font-family: var(--cursive-font);
+    color: var(--white-text);
+    font-size: 5rem;
+    margin-left: 6rem;
+}
+
+.apresentacao__subtitle{
+    justify-self: center;
+    font-family: var(--text-font-secundary);
+    color: var(--white-text);
+    font-size: 2rem;
+    margin: -2rem 0 4rem 14rem
+}
+
+.apresentacao__welcome-text{
+    font-family: var(--text-font);
+    color: var(--white-text);
+    font-size: 2rem;
+    padding: 1rem;
+}
+
+.apresentacao__initial-text{
+    font-family: var(--text-font-secundary);
+    color: var(--gray-text);
+    font-size: 1.15rem;
+    margin: 1rem 22rem 0.5rem 22rem;
+    text-align: center;
+    line-height: 1.65rem;
+}
+

@@ -40,7 +40,14 @@ export class DadosMock {
       name: "contact",
       content: "Contato e Sobre",
       active: false,
-      admin: false
+      admin: null
+    },
+    {
+      id: "dataEdit__page",
+      name: "dataEdit",
+      content: "Editar Dados",
+      active: false,
+      admin: true
     }
   ]
 
@@ -71,7 +78,8 @@ export class DadosMock {
             do dev, no caso, do Danilo Toriy. O Repositório é público
             e pode ser acessado por qualquer um que tiver vontade de ver
             o processo de desenvolvimento do projeto.
-        </p>`
+        </p>`,
+        admin: false
     },
     {
       id: 'card-2',
@@ -82,7 +90,8 @@ export class DadosMock {
               Caso deseje criar uma página de apresentação pessoal, o projeto
               foi desenvolvido de forma que possa ser replicado via código ou 
               por meio do preenchimento de informações.
-          </p>`
+          </p>`,
+      admin: false
     },
     {
       id: 'card-3',
@@ -94,7 +103,30 @@ export class DadosMock {
               a diferentes tipos de telas. Além disso, ela possui troca entre modo
               escuro e claro, bastando clicar aqui ou clicar no ícone no cabeçalho 
               para alternar o modo de exibição.
-          </p>`
+          </p>`,
+      admin: null
+    },
+    {
+      id: 'card-4',
+      href: null,
+      target: null,
+      content: `<img src="assets/icons/change-icon.svg" id="card__item--mode">
+          <p class="card__item--text">
+              Deseja retornar para o Modo Visualização? Clique aqui para sair do
+              Painel Administrativo.
+          </p>`,
+      admin: true
+    },
+    {
+      id: 'card-5',
+      href: null,
+      target: null,
+      content: `<img src="assets/icons/change-icon.svg" id="card__item--mode">
+          <p class="card__item--text">
+              Clique aqui para ir para a página de Edição dos dados. Lá você poderá
+              olhar as informações pessoais e habilidades, editá-las e modificá-las.
+          </p>`,
+      admin: true
     }
   ]
 
