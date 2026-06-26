@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { contactPageModel } from '../../models/contact-page.model';
-import { DadosMock } from '../../services/dados-mock';
-import { TipoContactPage } from '../../models/enums/tipo-contact-page';
-import { ContactSection } from "../../utils/contact-section/contact-section";
+import { contactPageModel } from '../../../models/contact-page.model';
+import { DadosMock } from '../../../services/dados-mock';
+import { TipoContactPage } from '../../../models/enums/tipo-contact-page';
 
 @Component({
   selector: 'app-contact-page',
-  imports: [ContactSection],
   templateUrl: './contact-page.html',
   styleUrl: './contact-page.scss',
+  standalone: false
 })
 export class ContactPage implements OnInit{
 

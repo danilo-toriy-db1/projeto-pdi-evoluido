@@ -5,12 +5,46 @@ import { ArrayHabilitiesModel } from '../models/array-habilities.model.js';
 import { TipoHabilidade } from '../models/enums/tipo-habilidade.js';
 import { contactPageModel } from '../models/contact-page.model.js';
 import { TipoContactPage } from '../models/enums/tipo-contact-page.js';
+import { HeaderAnchorsModel } from '../models/header-anchors.model.js';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class DadosMock {
+
+  headerAnchorContent: HeaderAnchorsModel[] = [
+    {
+      id: "initial__page",
+      name: "home",
+      content: "Página Inicial",
+      active: true,
+      admin: null
+    },
+    {
+      id: "about__me",
+      name: "about",
+      content: "Sobre Mim",
+      active: false,
+      admin: false
+    },
+    {
+      id: "habilities",
+      name: "habilities",
+      content: "Habilidades",
+      active: false,
+      admin: false
+    },
+    {
+      id: "contact__page",
+      name: "contact",
+      content: "Contato e Sobre",
+      active: false,
+      admin: false
+    }
+  ]
+
+
   about: AboutModel = {
     nome: "Danilo Riki Toriy",
     idade: 19,

@@ -1,21 +1,6 @@
 <app-header (paginaSelecionada)="trocaPagina($event)"></app-header>
 
-@switch (paginaAtual()) {
-    @case ('home') {
-        <app-initial-page />
-    }
-
-    @case ('about') {
-        <app-about-me-page />
-    }
-
-    @case('habilities'){
-        <app-habilities-page />
-    }
-
-    @case('contact'){
-        <app-contact-page />
-    }
-}
+<router-outlet />
 
 <app-footer />
+
