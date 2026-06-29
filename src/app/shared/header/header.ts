@@ -1,10 +1,11 @@
 import { Component, input, output } from '@angular/core';
 import { DadosMock } from '../../services/dados-mock';
 import { HeaderAnchorsModel } from '../../models/header-anchors.model';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
@@ -23,6 +24,9 @@ export class Header {
 
   trocarPagina(pagina: string){
     console.log(pagina);
+    this.dadosHeader.forEach((dado) => {
+      dado.active = (dado.name === pagina);
+    });
     this.paginaSelecionada.emit(pagina);
   }
 }

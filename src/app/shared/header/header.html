@@ -6,6 +6,7 @@
         </div>
         @for (anchor of dadosHeader; track $index) {
             <a [id]="anchor.id"
+               [ngClass]="anchor.active ? 'active' : 'desactive'"
                (click)="trocarPagina(anchor.name)">
                 {{ anchor.content }}
             </a>

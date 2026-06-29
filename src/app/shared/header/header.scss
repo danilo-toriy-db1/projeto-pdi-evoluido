@@ -74,6 +74,14 @@
     }
 }
 
+.active{
+    color: var(--background-main);
+}
+
+.desactive{
+    color: var(--white-text);
+}
+
 #navbar__menu--collapsed {
     display: none;
 }
