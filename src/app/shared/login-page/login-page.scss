@@ -1,0 +1,49 @@
+@use 'mixins/flexbox' as *;
+@use 'mixins/sizes_positions' as *;
+
+.login__page {
+    @include flexbox(center, center, column);
+    @include sizes_positions($width: 100vw, $height: 100vh);
+
+    h1 {
+        font-size: 3rem;
+        margin-bottom: 0.7rem;
+        font-family: var(--text-font);
+        color: var(--white-text);
+    }
+
+    p {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        font-family: var(--text-font-secundary);
+        color: var(--white-text);
+    }
+}
+
+#img-logo{
+    margin: 1rem 0 0 0.5rem;
+    width: 9rem;
+    border-radius: 1rem;
+    background-color: var(--color-card);
+}
+
+.btn__container {
+    @include flexbox(space-between, center, column);
+    gap: 0.5rem;
+
+    button {
+        padding: 1rem 2.5rem 1rem 2.5rem;
+        border-radius: 1rem;
+        font-family: var(--text-font-secundary);
+        font-size: 1rem;
+        color: var(--gray-text);
+        border: none;
+        background-color: var(--color-card);
+
+        &:hover{
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+    }
+}
+
