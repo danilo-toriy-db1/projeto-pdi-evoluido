@@ -1,0 +1,13 @@
+<app-card-about-me [modoEdicao]= "true" />
+
+<section class="habilities__list">
+    <ul class="card__container">
+        @for (habilities of cardsHabilities; track habilities) {
+            <li class="card" [id]="habilities.id">
+                <h3> {{ habilities.habilidade.habilidade }} </h3>
+                <span class="type"> {{ habilities.habilidade.tipo }} </span>
+                <!-- <app-button-exclude-hability /> -->
+            </li>
+        }
+    </ul>
+</section>

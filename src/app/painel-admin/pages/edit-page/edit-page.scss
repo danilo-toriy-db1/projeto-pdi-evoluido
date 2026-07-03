@@ -1,0 +1,41 @@
+@use 'mixins/flexbox' as *;
+@use 'mixins/sizes_positions' as *;
+@use 'mixins/grid' as *;
+
+.habilities__list {
+    @include flexbox(center, center, column);
+}
+
+.card__container {
+    @include grid($column: repeat(4, minmax(10rem, 1fr)));
+    box-shadow: 0.6rem 0.5rem 1rem 0.5rem var(--card-box-shadow);
+    color: var(--gray-text);
+    background-color: var(--color-card);
+    font-family: var(--text-font-secundary);
+    border: solid 0.25rem;
+    border-radius: 2rem;
+    @include sizes_positions($width: 70%);
+    list-style: none;
+    gap: 2rem;
+
+    .card {
+        @include flexbox($align: center, $justify: center, $direction: column);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        border-radius: 1rem;
+        background-color: #ffffff;
+        margin: 0.5rem 2rem 0.5rem 2rem;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(2px);
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+    }
+}
+
+.habilidade__content {
+    min-width: 8rem;
+    max-width: 10rem;
+}

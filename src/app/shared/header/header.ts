@@ -1,7 +1,8 @@
-import { Component, input, output } from '@angular/core';
+import { Component, computed, inject, output, signal } from '@angular/core';
 import { DadosMock } from '../../services/dados-mock';
 import { HeaderAnchorsModel } from '../../models/header-anchors.model';
 import { NgClass } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,20 +12,33 @@ import { NgClass } from '@angular/common';
 })
 export class Header {
 
+  private router = inject(Router);
+
   paginaSelecionada = output<string>();
-  admin = input<boolean>(false);
-  dadosHeader: HeaderAnchorsModel[];
+  admin = signal<boolean>(false);
+  dadosHeader = computed<HeaderAnchorsModel[]>(() => {
+    if (this.admin()) {
+       return this.dados.headerAnchorContent.filter((dado) => {
+          return (dado.admin || dado.admin === null);
+       })
+    } else {
+        return this.dados.headerAnchorContent.filter((dado) => {
+          return (!dado.admin || dado.admin === null);
+    })}
+  })
 
   constructor(private dados: DadosMock){
-    this.dadosHeader = this.dados.headerAnchorContent.filter((dado) => {
-        return (!dado.admin || dado.admin === null);
+    this.router.events.subscribe(() => {
+      this.admin.set(this.router.url.includes('/admin'))
     })
   }
+
+  
 
 
   trocarPagina(pagina: string){
     console.log(pagina);
-    this.dadosHeader.forEach((dado) => {
+    this.dadosHeader().forEach((dado) => {
       dado.active = (dado.name === pagina);
     });
     this.paginaSelecionada.emit(pagina);

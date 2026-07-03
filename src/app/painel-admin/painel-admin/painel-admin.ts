@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { PaginaAtualState } from '../../services/troca-pagina';
 
 @Component({
   selector: 'app-painel-admin',
@@ -6,4 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './painel-admin.scss',
   standalone: false
 })
-export class PainelAdmin {}
+export class PainelAdmin {
+  paginaAtual = signal<string>('home');
+
+  constructor(private paginaAtualState: PaginaAtualState) {
+    this.paginaAtual = this.paginaAtualState.paginaAtual;
+  }
+}

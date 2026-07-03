@@ -1,1 +1,9 @@
-<app-initial-page />
+@switch (paginaAtual()) {
+    @case ('home') {
+        <app-initial-page />
+    }
+
+    @case ('dataEdit') {
+        <app-edit-page />
+    }
+}

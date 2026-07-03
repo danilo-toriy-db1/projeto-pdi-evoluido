@@ -4,6 +4,8 @@ import { InitialPage } from './pages/initial-page/initial-page';
 import { PainelAdmin } from './painel-admin/painel-admin';
 import { RouterModule, Routes } from '@angular/router';
 import { CardInitialPage } from '../shared/card-initial-page/card-initial-page';
+import { CardAboutMe } from '../shared/card-about-me/card-about-me';
+import { EditPage } from './pages/edit-page/edit-page';
 
 const routes: Routes = [
   { path: '', component: PainelAdmin}
@@ -12,10 +14,12 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     InitialPage,
+    EditPage,
     PainelAdmin
   ],
   imports: [CommonModule, 
             CardInitialPage,
+            CardAboutMe,
             RouterModule.forChild(routes)],
   exports: [PainelAdmin]
 })

@@ -6,7 +6,7 @@ import { AboutMePage } from './pages/about-me-page/about-me-page';
 import { HabilitiesPage } from './pages/habilities-page/habilities-page';
 import { ContactPage } from './pages/contact-page/contact-page';
 import { CardInitialPage } from '../shared/card-initial-page/card-initial-page';
-import { CardAboutMe } from './components/card-about-me/card-about-me';
+import { CardAboutMe } from '../shared/card-about-me/card-about-me';
 import { CardHability } from './components/card-hability/card-hability';
 import { ContactSection } from './components/contact-section/contact-section';
 import { ButtonExcludeHability } from './components/button-exclude-hability/button-exclude-hability';
@@ -23,13 +23,13 @@ const routes: Routes = [
     AboutMePage,
     HabilitiesPage,
     ContactPage,
-    CardAboutMe,
     CardHability,
     ContactSection,
     ButtonExcludeHability
   ],
   imports: [CommonModule, 
             CardInitialPage,
+            CardAboutMe,
             RouterModule.forChild(routes)],
   exports: [LandingPage],
 })
