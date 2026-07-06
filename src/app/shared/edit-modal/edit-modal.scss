@@ -1,0 +1,17 @@
+@use 'mixins/flexbox' as *;
+
+.edit__modal[open]{
+    @include flexbox(center, center, column);
+    align-self: center;
+    justify-self: center;
+    border: none;
+    border-radius: 2rem;
+    padding: 5rem;
+    gap: 2rem;
+    background-color: var(--container-background);
+
+    &::backdrop{
+        background-color: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(0.2rem);
+    }
+}

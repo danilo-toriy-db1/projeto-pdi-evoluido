@@ -6,6 +6,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { CardInitialPage } from '../shared/card-initial-page/card-initial-page';
 import { CardAboutMe } from '../shared/card-about-me/card-about-me';
 import { EditPage } from './pages/edit-page/edit-page';
+import { EditModal } from '../shared/edit-modal/edit-modal';
+import { ReactiveFormsModule, ɵInternalFormsSharedModule } from "@angular/forms";
 
 const routes: Routes = [
   { path: '', component: PainelAdmin}
@@ -15,12 +17,14 @@ const routes: Routes = [
   declarations: [
     InitialPage,
     EditPage,
-    PainelAdmin
+    PainelAdmin,
   ],
-  imports: [CommonModule, 
-            CardInitialPage,
-            CardAboutMe,
-            RouterModule.forChild(routes)],
+  imports: [CommonModule,
+    CardInitialPage,
+    CardAboutMe,
+    ReactiveFormsModule,
+    EditModal,
+    RouterModule.forChild(routes), ɵInternalFormsSharedModule],
   exports: [PainelAdmin]
 })
 export class PainelAdminModule {}

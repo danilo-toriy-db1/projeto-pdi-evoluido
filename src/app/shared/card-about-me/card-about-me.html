@@ -11,18 +11,22 @@
             </div>
         </div>
         <div class="card__description">
-            <p class="card__biography"> <strong>Biografia:</strong> <br>
+            <p class="card__biography" (click)="abrirModal(dadosAboutMe.descricao.biografia)"> <strong>Biografia:</strong> <br>
                 {{ dadosAboutMe.descricao.biografia }}
             </p>
-            <p class="card__hobbies"> <strong>Hobbies:</strong> <br>
+            <p class="card__hobbies" (click)="abrirModal(dadosAboutMe.descricao.hobbies)"> <strong>Hobbies:</strong> <br>
                 {{ dadosAboutMe.descricao.hobbies }}
             </p>
-            <p class="card__dislike"> <strong>Desgostos:</strong> <br>
+            <p class="card__dislike" (click)="abrirModal(dadosAboutMe.descricao.desgostos)"> <strong>Desgostos:</strong> <br>
                 {{ dadosAboutMe.descricao.desgostos }}
             </p>
-            <p class="card__goals"> <strong>Objetivos de Vida:</strong> <br>
+            <p class="card__goals" (click)="abrirModal(dadosAboutMe.descricao.objetivos)"> <strong>Objetivos de Vida:</strong> <br>
                 {{ dadosAboutMe.descricao.objetivos }}
             </p>
         </div>
     </div>
 </section>
+
+@if (modoEdicao()) {
+    <app-edit-modal [dadoRecebido]="cardSelecionado()", [grupoCard]="'dados'"/>
+}

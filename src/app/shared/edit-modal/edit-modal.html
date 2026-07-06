@@ -1,0 +1,22 @@
+<dialog #editModal class="edit__modal">
+    <div class="close__container">
+        <button id="close__button" (click)="fecharModal()">
+            <img src="/assets/icons/close-icon.svg" alt="Ícone do botão de fechar">
+        </button>
+    </div>
+
+    <form [formGroup]="editForm">
+        <label for="input__texto"> 
+            {{ grupoCard() === 'dados' 
+                    ? 'dados: '
+                    : 'Habilidade: ' }}
+        </label>
+        <input type="text" formControlName="campoTexto" id="input__texto">
+
+    </form>
+
+    <div class="btn__container">
+        <button class="btn__submit">Salvar Alterações</button>
+        <button class="btn__reset">Cancelar</button>
+    </div>
+</dialog>
