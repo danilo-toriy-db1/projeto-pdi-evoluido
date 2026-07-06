@@ -1,0 +1,33 @@
+@use 'mixins/flexbox' as *;
+
+.login__modal[open]{
+    @include flexbox(center, center, column);
+    align-self: center;
+    justify-self: center;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 5rem;
+    gap: 2rem;
+    background: var(--background-main);
+
+    &::backdrop{
+        background-color: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(0.5rem);
+    }
+
+    #close__button{
+        border: none;
+        border-radius: 1rem;
+        text-align: center;
+        font-family: var(--text-font-secundary);
+        font-size: 1rem;
+        color: var(--white-text);
+        background: transparent;
+
+        &:hover{
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+    }
+}
+
