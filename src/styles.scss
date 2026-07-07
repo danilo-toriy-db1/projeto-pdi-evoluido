@@ -10,5 +10,8 @@
 body {
     @include flexbox(center, center, column);
     overflow-x: hidden;
+}
+
+app-root{
     background: var(--background-main);
 }

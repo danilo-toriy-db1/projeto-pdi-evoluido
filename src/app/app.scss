@@ -8,5 +8,4 @@
 body {
     @include flexbox(center, center, column);
     overflow-x: hidden;
-    background: var(--background-main);
 }

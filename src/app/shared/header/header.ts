@@ -3,6 +3,7 @@ import { DadosMock } from '../../services/dados-mock';
 import { HeaderAnchorsModel } from '../../models/header-anchors.model';
 import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
+import { MudaTema } from '../../services/muda-tema';
 
 @Component({
   selector: 'app-header',
@@ -27,7 +28,9 @@ export class Header {
     })}
   })
 
-  constructor(private dados: DadosMock){
+  constructor(private dados: DadosMock,
+              public mudaTema: MudaTema
+  ){
     this.router.events.subscribe(() => {
       this.admin.set(this.router.url.includes('/admin'))
     })
