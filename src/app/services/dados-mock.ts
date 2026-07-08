@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import type { AboutModel } from '.././models/about.model.js'
 import type { InitialPageCardsModel } from '.././models/initial-page-cards.model.js';
 import { ArrayHabilitiesModel } from '../models/array-habilities.model.js';
@@ -6,12 +6,15 @@ import { TipoHabilidade } from '../models/enums/tipo-habilidade.js';
 import { contactPageModel } from '../models/contact-page.model.js';
 import { TipoContactPage } from '../models/enums/tipo-contact-page.js';
 import { HeaderAnchorsModel } from '../models/header-anchors.model.js';
+import { LocalStorageService } from './local-storage.service.js';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class DadosMock {
+
+  localStorageService = inject(LocalStorageService);
 
   headerAnchorContent: HeaderAnchorsModel[] = [
     {
@@ -265,4 +268,10 @@ export class DadosMock {
       }
     }
   ]
+
+  constructor(){
+    if(!this.localStorageService.get('habilities')){
+      this.localStorageService.post('habilities', this.habilities);
+    }
+  }
 }

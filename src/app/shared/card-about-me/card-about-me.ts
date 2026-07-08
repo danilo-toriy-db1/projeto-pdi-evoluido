@@ -3,6 +3,7 @@ import { DadosMock } from '../../services/dados-mock';
 import { AboutModel } from '../../models/about.model';
 import { EditModal } from '../edit-modal/edit-modal';
 
+
 @Component({
   selector: 'app-card-about-me',
   templateUrl: './card-about-me.html',

@@ -1,8 +1,7 @@
 import { Component, signal, viewChild } from '@angular/core';
 import { ArrayHabilitiesModel } from '../../../models/array-habilities.model';
-import { DadosMock } from '../../../services/dados-mock';
-import { HabilitiesModel } from '../../../models/habilities.model';
 import { EditModal } from '../../../shared/edit-modal/edit-modal';
+import { HabilitiesDataService } from '../../../services/habilities-data.service';
 
 @Component({
   selector: 'app-edit-page',
@@ -11,15 +10,12 @@ import { EditModal } from '../../../shared/edit-modal/edit-modal';
   standalone: false
 })
 export class EditPage {
-    cardsHabilities: ArrayHabilitiesModel[];
-    cardData = signal<HabilitiesModel | null>(null);
+    cardData = signal<ArrayHabilitiesModel | null>(null);
     modalRef = viewChild(EditModal);
   
-    constructor(private dados: DadosMock){
-      this.cardsHabilities = this.dados.habilities;
-    }
+    constructor(public habilitiesDataService: HabilitiesDataService){}
 
-    abrirModal(habilities: HabilitiesModel){
+    abrirModal(habilities: ArrayHabilitiesModel){
       this.cardData.set(habilities);
       this.modalRef()?.abrirModal();
     }
