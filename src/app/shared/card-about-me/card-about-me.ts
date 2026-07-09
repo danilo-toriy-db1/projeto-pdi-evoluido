@@ -2,6 +2,7 @@ import { Component, input, signal, viewChild } from '@angular/core';
 import { DadosMock } from '../../services/dados-mock';
 import { AboutModel } from '../../models/about.model';
 import { EditModal } from '../edit-modal/edit-modal';
+import { ArrayHabilitiesModel } from '../../models/array-habilities.model';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class CardAboutMe {
   modoEdicao = input<boolean>(false);
   dadosAboutMe: AboutModel;
   modalRef = viewChild(EditModal);
-  cardSelecionado = signal<string | null>(null);
+  cardSelecionado = signal<ArrayHabilitiesModel | AboutModel | string | null>(null);
 
   constructor(private dados: DadosMock) {
     this.dadosAboutMe = this.dados.about;

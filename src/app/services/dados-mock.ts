@@ -7,6 +7,8 @@ import { contactPageModel } from '../models/contact-page.model.js';
 import { TipoContactPage } from '../models/enums/tipo-contact-page.js';
 import { HeaderAnchorsModel } from '../models/header-anchors.model.js';
 import { LocalStorageService } from './local-storage.service.js';
+import { Users } from '../models/users.js';
+import { Roles } from '../models/enums/roles.js';
 
 
 @Injectable({
@@ -54,8 +56,8 @@ export class DadosMock {
     }
   ]
 
-
   about: AboutModel = {
+    id: 1,
     nome: "Danilo Riki Toriy",
     idade: 19,
     carreira: "Estudante de Engenharia de Software",
@@ -111,8 +113,8 @@ export class DadosMock {
     },
     {
       id: 'card-4',
-      href: null,
-      target: null,
+      href: '/landing-page',
+      target: '_self',
       content: `<img src="assets/icons/change-icon.svg" id="card__item--mode">
           <p class="card__item--text">
               Deseja retornar para o Modo Visualização? Clique aqui para sair do
@@ -269,9 +271,25 @@ export class DadosMock {
     }
   ]
 
+  users: Users[] = [
+    { user: 'admin',
+      password: '123@',
+      role: Roles.ADMIN
+    },
+    { user: 'user',
+      password: '123U',
+      role: Roles.USUARIO
+    }
+  ]
+
   constructor(){
     if(!this.localStorageService.get('habilities')){
       this.localStorageService.post('habilities', this.habilities);
+    }
+    if(!this.localStorageService.get('users')){
+      this.localStorageService.post('users', this.users);
+      this.localStorageService.post('activeSession', false);
+      this.localStorageService.post('activeUserRole', Roles.USUARIO);
     }
   }
 }

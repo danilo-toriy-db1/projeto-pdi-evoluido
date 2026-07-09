@@ -1,7 +1,7 @@
 <h2>Acessar Conta</h2>
 
-<form [formGroup]="loginForm" class="login__form">
-	<input type="text" formControlName="email" id="input__email" placeholder="Digite seu email...">
+<form [formGroup]="loginForm" class="login__form" (ngSubmit)="login()">
+	<input type="text" formControlName="usuario" id="input__user" placeholder="Digite seu usuário...">
 	<input type="password" formControlName="senha" id="input__password" placeholder="Digite sua senha...">
 
 	<button class="btn__login" type="submit">Entrar</button>

@@ -2,6 +2,8 @@ import { Component, effect, ElementRef, input, OnInit, viewChild } from '@angula
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ArrayHabilitiesModel } from '../../models/array-habilities.model';
 import { HabilitiesDataService } from '../../services/habilities-data.service';
+import { AboutMeDataService } from '../../services/about-me-data-service';
+import { AboutModel } from '../../models/about.model';
 
 @Component({
   selector: 'app-edit-modal',
@@ -14,23 +16,27 @@ export class EditModal implements OnInit{
 
   editForm!: FormGroup;
   grupoCard = input<'habilidade' | 'dados'>();
-  dadoRecebido = input<ArrayHabilitiesModel | string | null>();
+  dadoRecebido = input<ArrayHabilitiesModel | AboutModel | string | null>();
   private modal = viewChild<ElementRef<HTMLDialogElement>>('editModal');
 
   constructor(private fb: FormBuilder,
-              private habilitiesDataService: HabilitiesDataService
+              private habilitiesDataService: HabilitiesDataService,
+              private aboutMeDataService: AboutMeDataService
   ){
     effect(() => {
       const dados = this.dadoRecebido();
 
       if (dados) {
         if (this.grupoCard() === 'habilidade'){
+          const dadosHabilidades = dados as ArrayHabilitiesModel;
           this.editForm.patchValue({
-            campoTexto : typeof dados === 'string' ? dados : dados.habilidade.habilidade
+            campoTexto : dadosHabilidades.habilidade.habilidade
           });
+
         } else{
+          const dadosAboutMe = dados as AboutModel;
           this.editForm.patchValue({
-            campoTexto: typeof dados === 'string' ? dados : dados.habilidade.habilidade
+            campoTexto: dadosAboutMe
           })
         }
       } else {
@@ -54,9 +60,8 @@ export class EditModal implements OnInit{
   }
 
   enviarDados(){
-    console.log(this.dadoRecebido());
-    const dadoAntigo = this.dadoRecebido() as ArrayHabilitiesModel;
     if(this.grupoCard() === 'habilidade'){
+      const dadoAntigo = this.dadoRecebido() as ArrayHabilitiesModel;
       const dadosAtualizados: ArrayHabilitiesModel = {
         id: dadoAntigo?.id,
         habilidade: {
@@ -65,6 +70,8 @@ export class EditModal implements OnInit{
         }
       }
       this.habilitiesDataService.updateHabilities(dadosAtualizados);
+    } else {
+        const dadoAntigo = this.dadoRecebido() as AboutModel;
     }
     this.fecharModal();
   }

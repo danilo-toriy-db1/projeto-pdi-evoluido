@@ -7,8 +7,8 @@ export const AuthGuard: CanActivateFn = () => {
     const router = inject(Router);
 
     if (!authService.haveLogin()) {
-        router.navigate(['/pagina-inicial']);
-        return false;
+        alert('Realize o login primeiro!');
+        return router.createUrlTree(['/login']);
     }
 
     return true;
