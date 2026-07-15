@@ -5,7 +5,8 @@
             [id]="card.id" 
             [attr.href]="card.href" 
             [attr.target]="card.target" 
-            [innerHTML]="card.content"></a>
+            [innerHTML]="card.content"
+            (click)="alternarTema(card.id)"></a>
         }
     </div>
 </section>

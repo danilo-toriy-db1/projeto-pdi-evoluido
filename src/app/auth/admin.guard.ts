@@ -1,6 +1,6 @@
 import { inject } from "@angular/core";
 import { CanActivateFn, Router } from "@angular/router";
-import { AuthService } from "../services/auth.service";
+import { AuthService } from "./auth.service/auth.service";
 import { Roles } from "../models/enums/roles";
 
 export const AdminGuard: CanActivateFn = () => {
@@ -8,7 +8,6 @@ export const AdminGuard: CanActivateFn = () => {
     const router = inject(Router);
 
     if (!authService.haveLogin() || authService.getRole() !== Roles.ADMIN) {
-        alert('Permissão negada!');
         router.navigate(['/login']);
         return false;
     }

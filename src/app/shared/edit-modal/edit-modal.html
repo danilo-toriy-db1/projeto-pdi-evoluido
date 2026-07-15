@@ -5,17 +5,31 @@
         </button>
     </div>
 
-    <form [formGroup]="editForm" (ngSubmit)="enviarDados()">
+    <form [formGroup]="editForm" 
+    (ngSubmit)="adicionaHabilidade() 
+                    ? adicionarHabilidade()
+                    : enviarDados()">
         <label for="input__texto"> 
             {{ grupoCard() === 'dados' 
-                    ? 'dados: '
+                    ? 'Dados: '
                     : 'Habilidade: ' }}
         </label>
         <input type="text" formControlName="campoTexto" id="input__texto">
 
+        @if (editForm.contains('tipo')) {
+            <label for="select__tipo" id="label__select">
+                Selecione o Tipo da Habilidade:
+            </label>
+            <select formControlName="tipo" id="select__tipo">
+                <option value="" disabled>Selecione um tipo...</option>
+                <option value="soft">Soft-Skill</option>
+                <option value="hard">Hard-Skill</option>
+            </select>
+        }
+
         <div class="btn__container">
             <button class="btn__submit" type="submit">Salvar Alterações</button>
-            <button class="btn__reset" type="reset">Cancelar</button>
+            <button class="btn__reset" (click)="fecharModal()">Cancelar</button>
         </div>
 
     </form>

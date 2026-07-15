@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { Footer } from "./shared/footer/footer";
 import { Header } from "./shared/header/header";
 import { PaginaAtualState } from './services/troca-pagina';
-import { MudaTema } from './services/muda-tema';
+import { MudaTema } from './services/muda-tema/muda-tema';
 
 @Component({
   selector: 'app-root',

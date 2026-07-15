@@ -1,5 +1,6 @@
 import { Component, computed, input, ViewEncapsulation } from '@angular/core';
-import { DadosMock } from '../../services/dados-mock';
+import { DadosMock } from '../../services/dados-mock/dados-mock';
+import { MudaTema } from '../../services/muda-tema/muda-tema';
 
 @Component({
   selector: 'app-card-initial-page',
@@ -17,6 +18,16 @@ export class CardInitialPage {
                   : this.dados.initialPageCard.filter((card) => !card.admin || card.admin === null);
   });
 
-  constructor(private dados: DadosMock){
+  constructor(private dados: DadosMock,
+              private mudaTema: MudaTema
+  ){
+  }
+
+  alternarTema(id: string){
+    if (id !== 'card-3') {
+      return;
+    }
+
+    this.mudaTema.alternarTema();
   }
 }

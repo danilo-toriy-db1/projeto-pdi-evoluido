@@ -1,9 +1,11 @@
-import { Component, effect, ElementRef, input, OnInit, viewChild } from '@angular/core';
+import { Component, effect, ElementRef, input, OnInit, signal, viewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ArrayHabilitiesModel } from '../../models/array-habilities.model';
-import { HabilitiesDataService } from '../../services/habilities-data.service';
-import { AboutMeDataService } from '../../services/about-me-data-service';
+import { HabilitiesDataService } from '../../services/habilities-data.service/habilities-data.service';
+import { AboutMeDataService } from '../../services/about-me-data-service/about-me-data-service';
 import { AboutModel } from '../../models/about.model';
+import { HabilitiesModel } from '../../models/habilities.model';
+import { TipoHabilidade } from '../../models/enums/tipo-habilidade';
 
 @Component({
   selector: 'app-edit-modal',
@@ -12,51 +14,71 @@ import { AboutModel } from '../../models/about.model';
   standalone: true,
     imports: [ReactiveFormsModule]
 })
-export class EditModal implements OnInit{
+export class EditModal{
 
   editForm!: FormGroup;
   grupoCard = input<'habilidade' | 'dados'>();
   dadoRecebido = input<ArrayHabilitiesModel | AboutModel | string | null>();
+  adicionaHabilidade = signal<boolean>(false);
   private modal = viewChild<ElementRef<HTMLDialogElement>>('editModal');
 
   constructor(private fb: FormBuilder,
               private habilitiesDataService: HabilitiesDataService,
               private aboutMeDataService: AboutMeDataService
   ){
+    this.editForm = this.fb.group({
+      campoTexto: ['']
+    });
+
     effect(() => {
       const dados = this.dadoRecebido();
 
-      if (dados) {
-        if (this.grupoCard() === 'habilidade'){
+      if(!dados && !this.adicionaHabilidade()){
+        this.editForm.reset();
+        return;
+      }
+
+      switch (this.grupoCard()) {
+        case 'habilidade':
+          if(this.adicionaHabilidade()){
+            this.configModalAdicionar();
+            return;
+          }
+
           const dadosHabilidades = dados as ArrayHabilitiesModel;
           this.editForm.patchValue({
             campoTexto : dadosHabilidades.habilidade.habilidade
           });
+          break;
 
-        } else{
+        case 'dados':
           const dadosAboutMe = dados as AboutModel;
           this.editForm.patchValue({
             campoTexto: dadosAboutMe
-          })
-        }
-      } else {
-        this.editForm.reset();
+          });
+          break;
+      
+        default:
+          throw new Error("Não foi possível listar os dados");
       }
     })
-  }
-
-  ngOnInit(){
-    this.editForm = this.fb.group({
-      campoTexto: ['']
-    });
   }
 
   abrirModal(){
     this.modal()?.nativeElement.showModal();
   }
 
+  abrirModalAdicionar(){
+    this.adicionaHabilidade.set(true)
+    this.modal()?.nativeElement.showModal();
+  }
+
   fecharModal(){
     this.modal()?.nativeElement.close();
+    this.adicionaHabilidade.set(false);
+    if(this.editForm.contains('tipo')){
+      this.editForm.removeControl('tipo');
+    }
   }
 
   enviarDados(){
@@ -72,7 +94,32 @@ export class EditModal implements OnInit{
       this.habilitiesDataService.updateHabilities(dadosAtualizados);
     } else {
         const dadoAntigo = this.dadoRecebido() as AboutModel;
+        const dadosAtualizados: AboutModel = {
+          ...dadoAntigo,
+          descricao: {
+            ...dadoAntigo.descricao,
+
+          }
+        }
     }
+    this.fecharModal();
+  }
+
+  configModalAdicionar(){
+    this.editForm.reset();
+    this.editForm.addControl('tipo', this.fb.control(''));
+    this.abrirModalAdicionar();
+  }
+
+  adicionarHabilidade(){
+    const novaHabilidade: HabilitiesModel = {
+      habilidade: this.editForm.get('campoTexto')?.value,
+      tipo: this.editForm.get('tipo')?.value === 'soft'
+                                          ? TipoHabilidade.SOFT
+                                          : TipoHabilidade.HARD
+    }
+    this.habilitiesDataService.postHabilities(novaHabilidade);
+
     this.fecharModal();
   }
 }

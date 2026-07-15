@@ -1,7 +1,9 @@
 @use 'mixins/flexbox' as *;
+@use 'mixins/sizes_positions' as *;
 
 .login__modal[open]{
     @include flexbox(center, center, column);
+    position: relative;
     align-self: center;
     justify-self: center;
     border: none;
@@ -9,6 +11,11 @@
     padding: 5rem;
     gap: 2rem;
     background: var(--background-main);
+
+    .close__container{
+        position: absolute;
+        @include sizes_positions($top: 1rem, $right: 1rem);
+    }
 
     &::backdrop{
         background-color: rgba(0, 0, 0, 0.7);

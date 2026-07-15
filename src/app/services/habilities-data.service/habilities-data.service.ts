@@ -1,7 +1,8 @@
 import { Injectable, signal } from '@angular/core';
-import { LocalStorageService } from './local-storage.service';
-import { ArrayHabilitiesModel } from '../models/array-habilities.model';
-import { DadosMock } from './dados-mock';
+import { LocalStorageService } from '../local-storage.service/local-storage.service';
+import { ArrayHabilitiesModel } from '../../models/array-habilities.model';
+import { DadosMock } from '../dados-mock/dados-mock';
+import { HabilitiesModel } from '../../models/habilities.model';
 
 @Injectable({
   providedIn: 'root',
@@ -37,4 +38,27 @@ export class HabilitiesDataService {
     this.localStorageService.post('habilities', habilitiesUpdated);
     this.habilities.set(habilitiesUpdated);
   }
+
+  postHabilities(hability: HabilitiesModel){
+    const habilidades = this.habilities();
+    const novaHabilidade: ArrayHabilitiesModel = {
+      id: this.getNextId(),
+      habilidade: hability
+    }
+
+    habilidades.push(novaHabilidade);
+    this.localStorageService.post('habilities', habilidades);
+    this.habilities.set(habilidades);
+  }
+
+  getNextId(): number {
+    const novoId = this.habilities().reduce((maiorId, habilidadeAtual) => {
+      return habilidadeAtual.id > maiorId
+              ? habilidadeAtual.id
+              : maiorId
+    }, 0);
+
+    return novoId + 1;
+  }
+
 }

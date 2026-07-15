@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
-import { AboutModel } from '../models/about.model';
-import { DadosMock } from './dados-mock';
-import { LocalStorageService } from './local-storage.service';
+import { AboutModel } from '../../models/about.model';
+import { DadosMock } from '../dados-mock/dados-mock';
+import { LocalStorageService } from '../local-storage.service/local-storage.service';
 
 @Injectable({
   providedIn: 'root',

@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
-import { LocalStorageService } from './local-storage.service';
-import { Roles } from '../models/enums/roles';
-import type { Users } from '../models/users';
+import { LocalStorageService } from '../../services/local-storage.service/local-storage.service';
+import { Roles } from '../../models/enums/roles';
+import type { Users } from '../../models/users';
 
 @Injectable({
   providedIn: 'root',

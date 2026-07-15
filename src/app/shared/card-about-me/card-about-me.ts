@@ -1,5 +1,5 @@
 import { Component, input, signal, viewChild } from '@angular/core';
-import { DadosMock } from '../../services/dados-mock';
+import { DadosMock } from '../../services/dados-mock/dados-mock';
 import { AboutModel } from '../../models/about.model';
 import { EditModal } from '../edit-modal/edit-modal';
 import { ArrayHabilitiesModel } from '../../models/array-habilities.model';

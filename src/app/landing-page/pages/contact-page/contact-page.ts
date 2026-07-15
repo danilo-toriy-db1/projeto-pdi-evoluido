@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { contactPageModel } from '../../../models/contact-page.model';
-import { DadosMock } from '../../../services/dados-mock';
+import { DadosMock } from '../../../services/dados-mock/dados-mock';
 import { TipoContactPage } from '../../../models/enums/tipo-contact-page';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ArrayHabilitiesModel } from '../../../models/array-habilities.model';
-import { DadosMock } from '../../../services/dados-mock';
+import { DadosMock } from '../../../services/dados-mock/dados-mock';
 
 @Component({
   selector: 'app-card-hability',

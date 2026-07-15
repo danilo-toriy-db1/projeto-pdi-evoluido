@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LocalStorageService } from '../../../services/local-storage.service';
-import { AuthService } from '../../../services/auth.service';
+import { LocalStorageService } from '../../../services/local-storage.service/local-storage.service';
+import { AuthService } from '../../../auth/auth.service/auth.service';
 import { Router } from '@angular/router';
 import { Roles } from '../../../models/enums/roles';
 

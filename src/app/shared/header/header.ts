@@ -1,9 +1,9 @@
 import { Component, computed, inject, output, signal } from '@angular/core';
-import { DadosMock } from '../../services/dados-mock';
+import { DadosMock } from '../../services/dados-mock/dados-mock';
 import { HeaderAnchorsModel } from '../../models/header-anchors.model';
 import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
-import { MudaTema } from '../../services/muda-tema';
+import { MudaTema } from '../../services/muda-tema/muda-tema';
 
 @Component({
   selector: 'app-header',
