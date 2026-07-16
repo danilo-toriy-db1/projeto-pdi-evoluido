@@ -1,5 +1,6 @@
 @use 'mixins/flexbox' as *;
 @use 'mixins/sizes_positions' as *;
+@use 'mixins/grid' as *;
 
 .edit__modal[open]{
     @include flexbox(center, center, column);
@@ -108,6 +109,34 @@
             background-color: #8a1414;
         }
 
+    }
+
+    .btn__delete{
+        @include grid($column: repeat(2, 1fr), $area: 'img span');
+        padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+        margin-top: 2.5rem;
+        border: none;
+        border-radius: 1rem;
+        text-align: center;
+        font-family: var(--text-font-secundary);
+        font-size: 1rem;
+        color: var(--white-text);
+        background-color: #150a30;
+
+        &:hover {
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+
+        span{
+            grid-area: span;
+            text-align: center;
+            justify-self: center;
+        }
+
+        img{
+            grid-area: img;
+        }
     }
 
 

@@ -122,4 +122,14 @@ export class EditModal{
 
     this.fecharModal();
   }
+
+  removerHabilidade(){
+    const hability = this.dadoRecebido() as ArrayHabilitiesModel;
+    this.habilitiesDataService.deleteHabilityById(hability);
+    this.fecharModal();
+  }
+
+  removerDados(){
+    console.log('oi');
+  }
 }

@@ -32,5 +32,13 @@
             <button class="btn__reset" (click)="fecharModal()">Cancelar</button>
         </div>
 
+        <button class="btn__delete" 
+        (click)="grupoCard() === 'habilidade'
+                    ? removerHabilidade()
+                    : removerDados()">
+            <span>Deletar</span> 
+            <img src="assets/icons/delete-icon.svg" alt="Ícone de Lixeira" id="trash__icon">
+        </button>
+
     </form>
 </dialog>

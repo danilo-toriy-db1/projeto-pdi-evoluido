@@ -51,6 +51,22 @@ export class HabilitiesDataService {
     this.habilities.set(habilidades);
   }
 
+  deleteHabilityById(hability: ArrayHabilitiesModel){
+    const habilities = this.habilities();
+
+    const arrayIndex = habilities.findIndex((item) => {
+      return item.id === hability.id
+    });
+
+    if(arrayIndex === -1){
+      console.log('Não foi possível achar o Index no Array dessa habilidade. Operação cancelada');
+      return;
+    }
+
+    habilities.splice(arrayIndex, 1);
+    this.localStorageService.post('habilities', habilities);
+  }
+
   getNextId(): number {
     const novoId = this.habilities().reduce((maiorId, habilidadeAtual) => {
       return habilidadeAtual.id > maiorId
