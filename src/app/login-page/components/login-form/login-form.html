@@ -1,8 +1,31 @@
-<h2>Acessar Conta</h2>
+<h2>
+	{{ cadastro() 
+		? 'Criar Conta'
+		: 'Acessar Conta'
+	}}
+</h2>
 
-<form [formGroup]="loginForm" class="login__form" (ngSubmit)="login()">
+<form [formGroup]="loginForm" class="login__form" 
+	  (ngSubmit)="cadastro()
+	  			? register()
+				: login()">
+	<label for="input__user">Usuário:</label>
 	<input type="text" formControlName="usuario" id="input__user" placeholder="Digite seu usuário...">
+	<label for="input__password">Senha:</label>
 	<input type="password" formControlName="senha" id="input__password" placeholder="Digite sua senha...">
+
+	@if (cadastro()) {
+		<label for="input__confirm">Confirme a Senha:</label>
+		<input type="password" formControlName="confirm" id="input__confirm" 
+		placeholder="Digite sua senha novamente...">
+
+		<label for="select__role">Escolha o nível de permissão:</label>
+		<select formControlName="role" id="select__role">
+			<option value="" disabled>Selecione uma opção...</option>
+			<option value="user">Usuário Padrão</option>
+			<option value="admin">Administrador</option>
+		</select>
+	}
 
 	<button class="btn__login" type="submit">Entrar</button>
 </form>
