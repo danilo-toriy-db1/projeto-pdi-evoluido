@@ -4,6 +4,7 @@ import { HeaderAnchorsModel } from '../../models/header-anchors.model';
 import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 import { MudaTema } from '../../services/muda-tema/muda-tema';
+import { LocalStorageService } from '../../services/local-storage.service/local-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -14,9 +15,11 @@ import { MudaTema } from '../../services/muda-tema/muda-tema';
 export class Header {
 
   private router = inject(Router);
+  private localStorageService = inject(LocalStorageService);
 
   paginaSelecionada = output<string>();
   admin = signal<boolean>(false);
+  tema = signal<string>('light');
   dadosHeader = computed<HeaderAnchorsModel[]>(() => {
     if (this.admin()) {
        return this.dados.headerAnchorContent.filter((dado) => {
@@ -36,8 +39,10 @@ export class Header {
     })
   }
 
-  
-
+  getTheme(){
+    this.mudaTema.alternarTema();
+    this.tema.set(this.localStorageService.get('tema'));
+  }
 
   trocarPagina(pagina: string){
     console.log(pagina);

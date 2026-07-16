@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, output, signal } from '@angular/core';
 import { LocalStorageService } from '../local-storage.service/local-storage.service';
 
 @Injectable({

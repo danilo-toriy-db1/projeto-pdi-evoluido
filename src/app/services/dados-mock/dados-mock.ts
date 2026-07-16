@@ -45,12 +45,19 @@ export class DadosMock {
       name: "contact",
       content: "Contato e Sobre",
       active: false,
-      admin: null
+      admin: false
     },
     {
       id: "dataEdit__page",
       name: "dataEdit",
       content: "Editar Dados",
+      active: false,
+      admin: true
+    },
+    {
+      id: "usersEdit__page",
+      name: "usersEdit",
+      content: "Editar Usuários",
       active: false,
       admin: true
     }
