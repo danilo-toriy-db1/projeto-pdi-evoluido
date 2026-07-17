@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { ArrayHabilitiesModel } from '../../../models/array-habilities.model';
 import { DadosMock } from '../../../services/dados-mock/dados-mock';
+import { HabilitiesDataService } from '../../../services/habilities-data.service/habilities-data.service';
 
 @Component({
   selector: 'app-card-hability',
@@ -10,9 +11,17 @@ import { DadosMock } from '../../../services/dados-mock/dados-mock';
 })
 export class CardHability {
 
-  cardsHabilities: ArrayHabilitiesModel[];
+  cardsHabilities = signal<ArrayHabilitiesModel[]>([]);
 
-  constructor(private dados: DadosMock){
-    this.cardsHabilities = this.dados.habilities;
+  constructor(private habilitiesDataService: HabilitiesDataService){
+    effect(() => {
+      const dados = this.habilitiesDataService.habilities();
+
+      if(!dados){
+        return;
+      }
+
+      this.cardsHabilities.set(dados);
+    })
   }
 }
