@@ -1,5 +1,4 @@
 export interface AboutModel {
-    id: number,
     nome: string,
     idade: number,
     carreira: string,

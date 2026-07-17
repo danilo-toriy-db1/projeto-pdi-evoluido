@@ -131,6 +131,7 @@
     &.modo-edicao{
         .card{
             @include flexbox($direction: column);
+            position: relative;
             box-shadow: 0.6rem 0.5rem 1rem 0.5rem var(--card-box-shadow);
             color: var(--gray-text);
             background-color: var(--color-card);
@@ -155,6 +156,26 @@
                 @include sizes_positions($width: 85%, $height: fit-content);
                 min-height: 60%;
                 margin: 1.5rem 0 1.5rem 0;
+            }
+
+            #btn__edit {
+                @include flexbox(space-between, center, row);
+                padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+                border: none;
+                border-radius: 1rem;
+                text-align: center;
+                font-family: var(--text-font-secundary);
+                font-size: 1rem;
+                color: var(--gray-text);
+                align-self: center;
+                position: absolute;
+                top: 45%;
+                gap: 1rem;
+
+                &:hover {
+                    transform: scale(1.1);
+                    cursor: pointer;
+                }
             }
         }
 

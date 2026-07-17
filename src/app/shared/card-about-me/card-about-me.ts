@@ -1,8 +1,11 @@
-import { Component, input, signal, viewChild } from '@angular/core';
+import { Component, effect, input, signal, viewChild } from '@angular/core';
 import { DadosMock } from '../../services/dados-mock/dados-mock';
 import { AboutModel } from '../../models/about.model';
 import { EditModal } from '../edit-modal/edit-modal';
 import { ArrayHabilitiesModel } from '../../models/array-habilities.model';
+import { AboutDataShared } from '../../models/about-data-shared.model';
+import { ArrayAboutModel } from '../../models/array-about.model';
+import { AboutMeDataService } from '../../services/about-me-data-service/about-me-data-service';
 
 
 @Component({
@@ -12,22 +15,35 @@ import { ArrayHabilitiesModel } from '../../models/array-habilities.model';
   standalone: true,
   imports: [EditModal],
 })
-export class CardAboutMe {
+export class CardAboutMe{
 
   modoEdicao = input<boolean>(false);
-  dadosAboutMe: AboutModel;
   modalRef = viewChild(EditModal);
-  cardSelecionado = signal<ArrayHabilitiesModel | AboutModel | string | null>(null);
+  dadosAboutMe = signal<ArrayAboutModel[]>([]);
+  cardSelecionado = signal<AboutDataShared>({id: -1, dado: '', campo: ''});
 
-  constructor(private dados: DadosMock) {
-    this.dadosAboutMe = this.dados.about;
+  constructor(public aboutMeDataService: AboutMeDataService) {
+    effect(() => {
+      const dados = aboutMeDataService.dadosAboutMe();
+
+      if(!dados){
+        return;
+      }
+
+      this.dadosAboutMe.set(dados);
+    })
   }
 
-  abrirModal(dadoCapturado: string){
+  abrirModal(id: number, dadoCapturado: string, campo: string){
     if(!this.modoEdicao()){
       return;
     }
-    this.cardSelecionado.set(dadoCapturado);
+    const dados: AboutDataShared = {
+      id: id,
+      dado: dadoCapturado,
+      campo: campo
+    }
+    this.cardSelecionado.set(dados);
     this.modalRef()?.abrirModal();
   }
 

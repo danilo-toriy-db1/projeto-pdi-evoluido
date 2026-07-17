@@ -1,30 +1,48 @@
 <section id="about-me" [class.modo-edicao]="modoEdicao()">
-    <div class="card">
-        <div class="container">
-            <img src="./assets/img/logo.jpg" alt="Foto de perfil" id="img-profile">
-            <div class="card__infos">
-                <h2 class="card__info--name">{{ dadosAboutMe.nome }}</h2>
-                <h2 class="card__info--age">{{ dadosAboutMe.idade }} anos</h2>
-                <h2 class="card__info--carreer">{{ dadosAboutMe.carreira }}</h2>
-                <h2 class="card__info--occupation">{{ dadosAboutMe.profissao }}</h2>
-                <h2 class="card__info--enterprise">{{ dadosAboutMe.empresa }}</h2>
+    @for (person of dadosAboutMe(); track person.id) {
+        <div class="card">
+            <div class="container">
+                <img src="./assets/img/logo.jpg" alt="Foto de perfil" id="img-profile">
+                <div class="card__infos">
+                    <h2 class="card__info--name">{{ person.dados.nome }}</h2>
+                    <h2 class="card__info--age">{{ person.dados.idade }} anos</h2>
+                    <h2 class="card__info--carreer">{{ person.dados.carreira }}</h2>
+                    <h2 class="card__info--occupation">{{ person.dados.profissao }}</h2>
+                    <h2 class="card__info--enterprise">{{ person.dados.empresa }}</h2>
+                </div>
+            </div>
+    
+            @if (modoEdicao()) {
+                <button id="btn__edit">
+                    <img src="assets/icons/edit-icon.svg">
+                    <span>Editar Dados Pessoais</span>
+                </button>
+            }
+    
+            <div class="card__description">
+                <p class="card__biography" 
+                (click)="abrirModal(person.id, person.dados.descricao.biografia, 'biografia')"> 
+                <strong>Biografia:</strong> <br>
+                    {{ person.dados.descricao.biografia }}
+                </p>
+                <p class="card__hobbies" 
+                (click)="abrirModal(person.id, person.dados.descricao.hobbies, 'hobbies')"> 
+                <strong>Hobbies:</strong> <br>
+                    {{ person.dados.descricao.hobbies }}
+                </p>
+                <p class="card__dislike" 
+                (click)="abrirModal(person.id, person.dados.descricao.desgostos, 'desgostos')"> 
+                <strong>Desgostos:</strong> <br>
+                    {{ person.dados.descricao.desgostos }}
+                </p>
+                <p class="card__goals" 
+                (click)="abrirModal(person.id, person.dados.descricao.objetivos, 'objetivos')"> 
+                <strong>Objetivos de Vida:</strong> <br>
+                    {{ person.dados.descricao.objetivos }}
+                </p>
             </div>
         </div>
-        <div class="card__description">
-            <p class="card__biography" (click)="abrirModal(dadosAboutMe.descricao.biografia)"> <strong>Biografia:</strong> <br>
-                {{ dadosAboutMe.descricao.biografia }}
-            </p>
-            <p class="card__hobbies" (click)="abrirModal(dadosAboutMe.descricao.hobbies)"> <strong>Hobbies:</strong> <br>
-                {{ dadosAboutMe.descricao.hobbies }}
-            </p>
-            <p class="card__dislike" (click)="abrirModal(dadosAboutMe.descricao.desgostos)"> <strong>Desgostos:</strong> <br>
-                {{ dadosAboutMe.descricao.desgostos }}
-            </p>
-            <p class="card__goals" (click)="abrirModal(dadosAboutMe.descricao.objetivos)"> <strong>Objetivos de Vida:</strong> <br>
-                {{ dadosAboutMe.descricao.objetivos }}
-            </p>
-        </div>
-    </div>
+    }
 </section>
 
 @if (modoEdicao()) {

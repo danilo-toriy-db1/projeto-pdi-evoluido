@@ -6,6 +6,7 @@ import { AboutMeDataService } from '../../services/about-me-data-service/about-m
 import { AboutModel } from '../../models/about.model';
 import { HabilitiesModel } from '../../models/habilities.model';
 import { TipoHabilidade } from '../../models/enums/tipo-habilidade';
+import { AboutDataShared } from '../../models/about-data-shared.model';
 
 @Component({
   selector: 'app-edit-modal',
@@ -18,7 +19,7 @@ export class EditModal{
 
   editForm!: FormGroup;
   grupoCard = input<'habilidade' | 'dados'>();
-  dadoRecebido = input<ArrayHabilitiesModel | AboutModel | string | null>();
+  dadoRecebido = input<ArrayHabilitiesModel | AboutDataShared | null>();
   adicionaHabilidade = signal<boolean>(false);
   private modal = viewChild<ElementRef<HTMLDialogElement>>('editModal');
 
@@ -52,9 +53,9 @@ export class EditModal{
           break;
 
         case 'dados':
-          const dadosAboutMe = dados as AboutModel;
+          const dadosAboutMe = dados as AboutDataShared;
           this.editForm.patchValue({
-            campoTexto: dadosAboutMe
+            campoTexto: dadosAboutMe.dado
           });
           break;
       
@@ -92,15 +93,15 @@ export class EditModal{
         }
       }
       this.habilitiesDataService.updateHabilities(dadosAtualizados);
+      console.log(dadoAntigo);
     } else {
-        const dadoAntigo = this.dadoRecebido() as AboutModel;
-        const dadosAtualizados: AboutModel = {
-          ...dadoAntigo,
-          descricao: {
-            ...dadoAntigo.descricao,
-
-          }
+        const dadoAntigo = this.dadoRecebido() as AboutDataShared;
+        const dadosAtualizados: AboutDataShared = {
+          id: dadoAntigo.id,
+          dado: this.editForm.get('campoTexto')?.value,
+          campo: dadoAntigo.campo
         }
+        this.aboutMeDataService.updateDescriptionData(dadosAtualizados);
     }
     this.fecharModal();
   }

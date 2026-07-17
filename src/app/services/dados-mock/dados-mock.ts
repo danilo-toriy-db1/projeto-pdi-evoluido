@@ -9,6 +9,7 @@ import { HeaderAnchorsModel } from '../../models/header-anchors.model.js';
 import { LocalStorageService } from '../local-storage.service/local-storage.service.js';
 import { Users } from '../../models/users.js';
 import { Roles } from '../../models/enums/roles.js';
+import { ArrayAboutModel } from '../../models/array-about.model.js';
 
 
 @Injectable({
@@ -63,20 +64,22 @@ export class DadosMock {
     }
   ]
 
-  about: AboutModel = {
+  about: ArrayAboutModel[] = [{ 
     id: 1,
-    nome: "Danilo Riki Toriy",
-    idade: 19,
-    carreira: "Estudante de Engenharia de Software",
-    profissao: "Estagiário de Desenvolvimento de Software",
-    empresa: "DB1 Global Software",
-    descricao: {
-        biografia: "bla bla bla",
-        hobbies: "bla bla bla",
-        desgostos: "bla bla bla",
-        objetivos: "bla bla bla"
-    }
-  }
+    dados: {
+      nome: "Danilo Riki Toriy",
+      idade: 19,
+      carreira: "Estudante de Engenharia de Software",
+      profissao: "Estagiário de Desenvolvimento de Software",
+      empresa: "DB1 Global Software",
+      descricao: {
+          biografia: "bla bla bla",
+          hobbies: "bla bla bla",
+          desgostos: "bla bla bla",
+          objetivos: "bla bla bla"
+      }
+    }    
+  }]
 
   initialPageCard: InitialPageCardsModel[] = [
     {
