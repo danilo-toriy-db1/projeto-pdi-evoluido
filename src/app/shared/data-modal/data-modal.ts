@@ -1,0 +1,70 @@
+import { Component, effect, ElementRef, input, viewChild } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AboutPersonalDataShared } from '../../models/about-personal-data-shared';
+import { AboutMeDataService } from '../../services/about-me-data-service/about-me-data-service';
+
+@Component({
+  selector: 'app-data-modal',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './data-modal.html',
+  styleUrl: './data-modal.scss',
+})
+export class DataModal {
+
+  dataForm!: FormGroup;
+  dadoRecebido = input<AboutPersonalDataShared | null>();
+  private modal = viewChild<ElementRef<HTMLDialogElement>>('dataModal');
+
+  constructor(private fb: FormBuilder,
+              private aboutMeDataService: AboutMeDataService
+  ){
+    this.dataForm = this.fb.group({
+      nome: [''],
+      idade: ['', [Validators.pattern('^[0-9]*$')]],
+      carreira: [''],
+      profissao: [''],
+      empresa: [''],
+      imagemPerfil: [null]
+    });
+
+    effect(() => {
+      const dados = this.dadoRecebido();
+
+      if(!dados){
+        console.error('Erro ao buscar os dados pessoais');
+        return;
+      }
+
+      this.dataForm.patchValue({
+        nome: dados.nome,
+        idade: dados.idade,
+        carreira: dados.carreira,
+        profissao: dados.profissao,
+        empresa: dados.empresa
+      })
+    })
+  }
+
+  abrirModal(){
+    this.modal()?.nativeElement.showModal();
+  }
+
+  fecharModal(){
+    this.modal()?.nativeElement.close();
+  }
+
+  enviarDados(){
+    const dadoAntigo = this.dadoRecebido() as AboutPersonalDataShared;
+    const dadosAtualizados: AboutPersonalDataShared = {
+      id: dadoAntigo.id,
+      nome: this.dataForm.get('nome')?.value,
+      idade: this.dataForm.get('idade')?.value,
+      carreira: this.dataForm.get('carreira')?.value,
+      profissao: this.dataForm.get('profissao')?.value,
+      empresa: this.dataForm.get('empresa')?.value
+    }
+    this.aboutMeDataService.updatePersonalData(dadosAtualizados);
+    this.fecharModal();
+  }
+}

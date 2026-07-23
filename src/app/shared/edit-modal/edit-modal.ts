@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ArrayHabilitiesModel } from '../../models/array-habilities.model';
 import { HabilitiesDataService } from '../../services/habilities-data.service/habilities-data.service';
 import { AboutMeDataService } from '../../services/about-me-data-service/about-me-data-service';
-import { AboutModel } from '../../models/about.model';
 import { HabilitiesModel } from '../../models/habilities.model';
 import { TipoHabilidade } from '../../models/enums/tipo-habilidade';
 import { AboutDataShared } from '../../models/about-data-shared.model';
+import { AboutPersonalDataShared } from '../../models/about-personal-data-shared';
 
 @Component({
   selector: 'app-edit-modal',
@@ -131,6 +131,8 @@ export class EditModal{
   }
 
   removerDados(){
-    console.log('oi');
+    const data = this.dadoRecebido() as AboutDataShared;
+    this.aboutMeDataService.deleteDescriptionContent(data.id, data.campo);
+    this.fecharModal();
   }
 }

@@ -6,6 +6,8 @@ import { ArrayHabilitiesModel } from '../../models/array-habilities.model';
 import { AboutDataShared } from '../../models/about-data-shared.model';
 import { ArrayAboutModel } from '../../models/array-about.model';
 import { AboutMeDataService } from '../../services/about-me-data-service/about-me-data-service';
+import { DataModal } from '../data-modal/data-modal';
+import { AboutPersonalDataShared } from '../../models/about-personal-data-shared';
 
 
 @Component({
@@ -13,14 +15,16 @@ import { AboutMeDataService } from '../../services/about-me-data-service/about-m
   templateUrl: './card-about-me.html',
   styleUrl: './card-about-me.scss',
   standalone: true,
-  imports: [EditModal],
+  imports: [EditModal, DataModal],
 })
 export class CardAboutMe{
 
   modoEdicao = input<boolean>(false);
   modalRef = viewChild(EditModal);
+  modalPessoalRef = viewChild(DataModal);
   dadosAboutMe = signal<ArrayAboutModel[]>([]);
-  cardSelecionado = signal<AboutDataShared>({id: -1, dado: '', campo: ''});
+  cardSelecionado = signal<AboutDataShared | null>(null);
+  pessoaSelecionada = signal<AboutPersonalDataShared | null>(null)
 
   constructor(public aboutMeDataService: AboutMeDataService) {
     effect(() => {
@@ -45,6 +49,22 @@ export class CardAboutMe{
     }
     this.cardSelecionado.set(dados);
     this.modalRef()?.abrirModal();
+  }
+
+  abrirModalDadosPessoais(id: number, pessoa: AboutModel){
+    if(!this.modoEdicao()){
+      return;
+    }
+    const dados: AboutPersonalDataShared = {
+      id: id,
+      nome: pessoa.nome,
+      idade: pessoa.idade,
+      carreira: pessoa.carreira,
+      profissao: pessoa.profissao,
+      empresa: pessoa.empresa
+    }
+    this.pessoaSelecionada.set(dados);
+    this.modalPessoalRef()?.abrirModal();
   }
 
 }

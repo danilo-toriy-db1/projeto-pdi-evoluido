@@ -13,7 +13,7 @@
             </div>
     
             @if (modoEdicao()) {
-                <button id="btn__edit">
+                <button id="btn__edit" (click)="abrirModalDadosPessoais(person.id, person.dados)">
                     <img src="assets/icons/edit-icon.svg">
                     <span>Editar Dados Pessoais</span>
                 </button>
@@ -47,4 +47,5 @@
 
 @if (modoEdicao()) {
     <app-edit-modal [dadoRecebido]="cardSelecionado()", [grupoCard]="'dados'"/>
+    <app-data-modal [dadoRecebido]="pessoaSelecionada()"/>
 }

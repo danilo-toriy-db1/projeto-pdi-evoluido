@@ -4,6 +4,7 @@ import { DadosMock } from '../dados-mock/dados-mock';
 import { LocalStorageService } from '../local-storage.service/local-storage.service';
 import { ArrayAboutModel } from '../../models/array-about.model';
 import { AboutDataShared } from '../../models/about-data-shared.model';
+import { AboutPersonalDataShared } from '../../models/about-personal-data-shared';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,6 @@ export class AboutMeDataService {
   }
 
   updateDescriptionData(dado: AboutDataShared){
-    console.log(dado);
     this.dadosAboutMe.update((dadosAtuais) => {
       if(!dadosAtuais){
         return null;
@@ -50,19 +50,67 @@ export class AboutMeDataService {
         };
       });
     });
-    console.log(this.dadosAboutMe());
+
     this.localStorageService.post('personalData', this.dadosAboutMe());
   }
 
-  // updateAboutData(dado: AboutDataShared){
-  //   const dadosAboutMe = this.dadosAboutMe();
-  //   console.log(dadosAboutMe);
+  deleteDescriptionContent(id: number, campo: string){
+    this.dadosAboutMe.update((dadosAtuais) => {
+      if(!dadosAtuais){
+        return null;
+      }
+      
+      return dadosAtuais.map( (item) => {
+        if (item.id !== id) {
+          return item;
+        }
 
-  //   const dataUpdated = dadosAboutMe?.map(() => {
+        return {
+          ...item,
+          dados: {
+            ...item.dados,
+            descricao: 
+              {
+                ...item.dados.descricao,
+                [campo]: 'Sem Informações'
+              }
+          }
+        };
+      });
+    });
 
-  //   })
+    this.localStorageService.post('personalData', this.dadosAboutMe());
+  }
 
-  // //   this.localStorageService.post('habilities', dataUpdated);
-  // //   this.dadosAboutMe.set(dataUpdated);
-  //  }
+  updatePersonalData(dado: AboutPersonalDataShared){
+    this.dadosAboutMe.update((dadosAtuais) => {
+      if(!dadosAtuais){
+        return null;
+      }
+
+      return dadosAtuais.map( (item) => {
+        if (item.id !== dado.id) {
+          return item;
+        }
+
+        return {
+          ...item,
+          dados: {
+            nome: dado.nome,
+            idade: dado.idade,
+            carreira: dado.carreira,
+            profissao: dado.profissao,
+            empresa: dado.empresa,
+            descricao: 
+              {
+                ...item.dados.descricao
+              }
+          }
+        };
+      });
+    });
+
+    this.localStorageService.post('personalData', this.dadosAboutMe());
+  }
+
 }

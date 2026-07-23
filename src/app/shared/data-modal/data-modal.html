@@ -1,0 +1,47 @@
+<dialog #dataModal class="data__modal">
+    <div class="close__container">
+        <button id="close__button" (click)="fecharModal()">
+            <img src="/assets/icons/close-icon.svg" alt="Ícone do botão de fechar">
+        </button>
+    </div>
+
+    <form [formGroup]="dataForm" id="form">
+        <div class="wrapper">
+            <div class="nome">
+                <label for="input__nome"> Nome: </label>
+                <input type="text" formControlName="nome" id="input__nome">
+            </div>
+            
+            <div class="idade">
+                <label for="input__idade"> Idade: </label>
+                <input type="text" formControlName="idade" id="input__idade">
+            </div>
+        </div>
+        
+        <div class="carreira">
+            <label for="input__carreira"> Formação: </label>
+            <input type="text" formControlName="carreira" id="input__carreira">
+        </div>
+        
+        <div class="profissao">
+            <label for="input__profissao"> Profissão: </label>
+            <input type="text" formControlName="profissao" id="input__profissao">
+        </div>
+
+        <div class="empresa">
+            <label for="input__empresa"> Empresa: </label>
+            <input type="text" formControlName="empresa" id="input__empresa">
+        </div>
+        
+    </form>
+
+    <div class="btn__container">
+        <button class="btn__submit" type="submit" form="form" (click)="enviarDados()">Salvar Alterações</button>
+        <button class="btn__reset" (click)="fecharModal()" form="form">Cancelar</button>
+    </div>
+
+    <button class="btn__delete" type="button">
+        <span>Deletar</span> 
+        <img src="assets/icons/delete-icon.svg" alt="Ícone de Lixeira" id="trash__icon">
+    </button>
+</dialog>

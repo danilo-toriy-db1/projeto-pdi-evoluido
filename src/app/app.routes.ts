@@ -15,6 +15,6 @@ export const routes: Routes = [
     loadChildren: () => import('./login-page/login-page-module').then(
         (m) => m.LoginPageModule
     )},
-    {path: '', redirectTo: 'landing-page', pathMatch: 'full'},
-    {path: '**', redirectTo: 'landing-page'}
+    {path: '', redirectTo: 'login', pathMatch: 'full'},
+    {path: '**', redirectTo: 'login'}
 ];
