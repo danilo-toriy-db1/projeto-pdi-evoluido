@@ -171,6 +171,7 @@
                 position: absolute;
                 top: 45%;
                 gap: 1rem;
+                background-color: var(--card-edit);
 
                 &:hover {
                     transform: scale(1.1);
@@ -230,7 +231,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             padding: 1.5rem;
             border-radius: 1rem;
-            background-color: #ffffff;
+            background-color: var(--card-edit);
             margin: 0.5rem 2rem 0.5rem 2rem;
 
             &:hover {

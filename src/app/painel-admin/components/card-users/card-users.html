@@ -1,0 +1,20 @@
+<table>
+    <thead>
+        <tr>
+            <th>ID: </th>
+            <th>Usuário: </th>
+            <th>Senha: </th>
+            <th>Nível de Acesso: </th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (usuario of usuarios(); track $index) {
+            <tr>
+                <td>{{ $index }}</td>
+                <td>{{ usuario.user }}</td>
+                <td>{{ usuario.password }}</td>
+                <td>{{ usuario.role }}</td>
+            </tr>
+        }
+    </tbody>    
+</table>

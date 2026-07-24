@@ -8,11 +8,13 @@ import { CardAboutMe } from '../shared/card-about-me/card-about-me';
 import { EditPage } from './pages/edit-page/edit-page';
 import { ReactiveFormsModule, ɵInternalFormsSharedModule } from '@angular/forms';
 import { EditModal } from '../shared/edit-modal/edit-modal';
+import { EditUserPage } from './pages/edit-user-page/edit-user-page';
+import { CardUsers } from './components/card-users/card-users';
 
 const routes: Routes = [{ path: '', component: PainelAdmin }];
 
 @NgModule({
-  declarations: [InitialPage, EditPage, PainelAdmin],
+  declarations: [InitialPage, EditPage, PainelAdmin, EditUserPage, CardUsers],
   imports: [
     CommonModule,
     CardInitialPage,
