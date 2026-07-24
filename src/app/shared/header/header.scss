@@ -145,7 +145,47 @@
     }
 }
 
-#img-theme{
+#logoutButton{
+    @include sizes_positions(max-content, max-content);
+    padding: 0.25rem;
+    border: 0;
+    background-color: transparent;
+    position: absolute;
+
+    @include responsivo('computador'){
+        margin: 0 7.5rem 0 0;
+    }
+
+    @include responsivo('tablet'){
+        margin: 0 7.5rem 0 0;
+    }
+
+    @include responsivo('celular'){
+        margin: 2rem 0 0 0;
+        display: flex;
+        align-self: center;
+    }
+
+    &:hover{
+        cursor: pointer;
+
+        &::after{
+            content: 'Encerrar Sessão';
+            position: absolute;
+            background-color: var(--color-card);
+            color: var(--gray-text);
+            font-family: var(--text-font-secundary);
+            z-index: 10;
+            @include sizes_positions($width:max-content, $top: 90%, $left: -150%, $right: 0);
+            border-radius: 1rem;
+            padding: 0.35rem;
+            font-size: 0.85rem;
+        }
+    }
+}
+
+
+img {
     @include responsivo('computador'){
         @include sizes_positions(1.8rem, 1.8rem);
     }

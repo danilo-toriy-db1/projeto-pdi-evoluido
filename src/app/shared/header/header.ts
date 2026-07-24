@@ -5,6 +5,7 @@ import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 import { MudaTema } from '../../services/muda-tema/muda-tema';
 import { LocalStorageService } from '../../services/local-storage.service/local-storage.service';
+import { AuthService } from '../../auth/auth.service/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -32,7 +33,8 @@ export class Header {
   })
 
   constructor(private dados: DadosMock,
-              public mudaTema: MudaTema
+              public mudaTema: MudaTema,
+              private authService: AuthService,
   ){
     this.router.events.subscribe(() => {
       this.admin.set(this.router.url.includes('/admin'))
@@ -50,5 +52,10 @@ export class Header {
       dado.active = (dado.name === pagina);
     });
     this.paginaSelecionada.emit(pagina);
+  }
+
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

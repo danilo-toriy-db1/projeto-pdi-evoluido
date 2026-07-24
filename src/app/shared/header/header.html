@@ -13,12 +13,19 @@
         }
     </nav>    
 
-    <div id="button__container" class="tooltip__theme">
+    <div id="button__container">
         <button id="themeButton" (click)="getTheme()">
             <img [src]="tema() === 'light'
                             ? '/assets/icons/light-mode.svg'
                             : '/assets/icons/dark-mode.svg'" 
             alt="Ícone do modo atual da página" id="img-theme">
         </button>
+        <button id="logoutButton" (click)="logout()">
+            <img [src]="tema() === 'dark'
+                            ? '/assets/icons/logout-icon.svg'
+                            : '/assets/icons/black-logout-icon.svg'" 
+            alt="Ícone de logout">
+        </button>
     </div>
+
 </header>
