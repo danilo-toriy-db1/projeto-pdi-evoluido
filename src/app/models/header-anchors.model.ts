@@ -3,6 +3,6 @@ export interface HeaderAnchorsModel {
     name: string,
     content: string,
     active: boolean,
-    admin: boolean | null
+    admin: boolean | null,
 }
 

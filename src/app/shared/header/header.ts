@@ -1,4 +1,4 @@
-import { Component, computed, inject, output, signal } from '@angular/core';
+import { Component, computed, inject, input, output, signal } from '@angular/core';
 import { DadosMock } from '../../services/dados-mock/dados-mock';
 import { HeaderAnchorsModel } from '../../models/header-anchors.model';
 import { NgClass } from '@angular/common';
@@ -18,14 +18,20 @@ export class Header {
   private router = inject(Router);
   private localStorageService = inject(LocalStorageService);
 
+  isLoginPage = input<boolean>();
   paginaSelecionada = output<string>();
   admin = signal<boolean>(false);
   tema = signal<string>('light');
   dadosHeader = computed<HeaderAnchorsModel[]>(() => {
+    console.log(this.isLoginPage());
+    if(this.isLoginPage()){
+      return [];
+    }
+
     if (this.admin()) {
-       return this.dados.headerAnchorContent.filter((dado) => {
+        return this.dados.headerAnchorContent.filter((dado) => {
           return (dado.admin || dado.admin === null);
-       })
+        })
     } else {
         return this.dados.headerAnchorContent.filter((dado) => {
           return (!dado.admin || dado.admin === null);

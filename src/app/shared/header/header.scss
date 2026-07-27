@@ -5,6 +5,7 @@
 
 #cabecalho{
     background-color: var(--background-header);
+    min-height: 2.15rem;
 
     @include responsivo('computador'){
         @include sizes_positions($width: 100vw, $top: 0);
