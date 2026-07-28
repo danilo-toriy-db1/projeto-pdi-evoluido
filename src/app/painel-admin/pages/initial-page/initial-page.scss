@@ -1,9 +1,10 @@
 @use 'mixins/flexbox' as *;
+@use 'mixins/breakpoints' as *;
 
 :host {
   display: block; 
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .apresentacao__img{
@@ -16,40 +17,89 @@
 }
 
 #img-logo{
-    margin: 1rem 0 0 0.5rem;
-    width: 9rem;
     border-radius: 1rem;
     background-color: var(--color-card);
+    margin: 0.25rem 0 0 0.25rem;
+    width: 10rem;
+
+    @include responsivo('computador'){
+        margin: 1rem 0 0 0.5rem;
+        width: 9rem;
+    }
+
 }
 
 .apresentacao__title{
     font-family: var(--cursive-font);
     color: var(--white-text);
-    font-size: 5rem;
-    margin-left: 6rem;
+
+    @include responsivo('computador'){
+        font-size: 5rem;
+        margin-left: 6rem;
+    }
+
+    @include responsivo('tablet'){
+        font-size: 4.5rem;
+        margin-left: 3rem;
+    }
+
+    @include responsivo('celular'){
+        font-size: 3.25rem;
+        margin: 2rem 0 0 2rem;
+    }
+}
+
+.apresentacao__welcome-text{
+    font-family: var(--text-font);
+    color: var(--white-text);
+    padding: 1.25rem;
+
+    @include responsivo('computador'){
+        font-size: 2rem;
+        padding: 1rem;
+    }
+
+    @include responsivo('tablet'){
+        font-size: 2.25rem;
+    }
+
+    @include responsivo('celular'){
+        font-size: 1.75rem;
+        text-align: center;
+    }
 }
 
 .apresentacao__subtitle{
     justify-self: center;
     font-family: var(--text-font-secundary);
     color: var(--white-text);
-    font-size: 2rem;
-    margin: -2rem 0 4rem 14rem
-}
+    font-size: 1.5rem;
+    margin: -2rem 0 4rem 14rem;
 
-.apresentacao__welcome-text{
-    font-family: var(--text-font);
-    color: var(--white-text);
-    font-size: 2rem;
-    padding: 1rem;
+    @include responsivo('celular'){
+        margin: 0 0 4rem 0;
+        align-self: center;
+    }
 }
 
 .apresentacao__initial-text{
     font-family: var(--text-font-secundary);
     color: var(--gray-text);
-    font-size: 1.15rem;
-    margin: 1rem 22rem 0.5rem 22rem;
     text-align: center;
     line-height: 1.65rem;
+    margin: 1rem 2rem 0.5rem 2rem;
+
+    @include responsivo('computador'){
+        font-size: 1.15rem;
+        margin: 1rem 22rem 0.5rem 22rem;
+    }
+
+    @include responsivo('tablet'){
+        font-size: 1.25rem;
+    }
+
+    @include responsivo('celular'){
+        font-size: 1.1rem;
+    }
 }
 

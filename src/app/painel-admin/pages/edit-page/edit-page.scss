@@ -1,22 +1,43 @@
 @use 'mixins/flexbox' as *;
 @use 'mixins/sizes_positions' as *;
 @use 'mixins/grid' as *;
+@use 'mixins/breakpoints' as *;
+
+app-card-about-me{
+    max-height: 10%;
+}
 
 .habilities__list {
     @include flexbox(center, center, column);
 }
 
 .card__container {
-    @include grid($column: repeat(4, minmax(10rem, 1fr)));
     box-shadow: 0.6rem 0.5rem 1rem 0.5rem var(--card-box-shadow);
     color: var(--gray-text);
     background-color: var(--color-card);
     font-family: var(--text-font-secundary);
     border: solid 0.25rem;
     border-radius: 2rem;
-    @include sizes_positions($width: 70%);
     list-style: none;
-    gap: 2rem;
+    text-align: center;
+    margin-bottom: 5rem;
+
+    @include responsivo('computador'){
+        @include grid($column: repeat(4, minmax(10rem, 1fr)));
+        @include sizes_positions($width: 70%);
+        gap: 2rem;
+    }
+
+    @include responsivo('tablet'){
+        @include grid($column: repeat(3, minmax(10rem, 1fr)));
+        gap: 1.5rem;
+    }
+
+    @include responsivo('celular'){
+        @include grid($column: repeat(2, minmax(8rem, 1fr)));
+        @include sizes_positions($width: 85%);
+        gap: 0.25rem;
+    }
 
     .card {
         @include flexbox($align: center, $justify: center, $direction: column);
@@ -25,6 +46,10 @@
         border-radius: 1rem;
         background-color: var(--card-edit);
         margin: 0.5rem 2rem 0.5rem 2rem;
+
+        @include responsivo('celular'){
+            margin: 0.5rem 1rem 0.5rem 1rem;
+        }
 
         &:hover {
             background-color: rgba(0, 0, 0, 0.1);

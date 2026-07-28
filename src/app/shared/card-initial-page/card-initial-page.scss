@@ -53,11 +53,14 @@
     box-shadow: 0.6rem 0.5rem 1rem 0.5rem var(--card-box-shadow);
     padding: 1.25rem;
     margin: 0 2rem 1.75rem 2.5rem;
+    min-width: 90%;
+    min-height: 10rem;
 
     @include responsivo('computador'){
         padding: 2rem;
         margin: 0 2rem 0 2.5rem;
     }
+
 
     img{
         width: 4rem;
