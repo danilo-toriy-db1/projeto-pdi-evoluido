@@ -1,6 +1,5 @@
 import { Component, effect, signal } from '@angular/core';
 import { ArrayHabilitiesModel } from '../../../models/array-habilities.model';
-import { DadosMock } from '../../../services/dados-mock/dados-mock';
 import { HabilitiesDataService } from '../../../services/habilities-data.service/habilities-data.service';
 
 @Component({

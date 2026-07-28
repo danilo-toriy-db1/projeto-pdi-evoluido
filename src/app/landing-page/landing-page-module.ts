@@ -9,7 +9,6 @@ import { CardInitialPage } from '../shared/card-initial-page/card-initial-page';
 import { CardAboutMe } from '../shared/card-about-me/card-about-me';
 import { CardHability } from './components/card-hability/card-hability';
 import { ContactSection } from './components/contact-section/contact-section';
-import { ButtonExcludeHability } from './components/button-exclude-hability/button-exclude-hability';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
@@ -24,8 +23,7 @@ const routes: Routes = [
     HabilitiesPage,
     ContactPage,
     CardHability,
-    ContactSection,
-    ButtonExcludeHability
+    ContactSection
   ],
   imports: [CommonModule, 
             CardInitialPage,

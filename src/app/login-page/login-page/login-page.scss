@@ -1,5 +1,6 @@
 @use 'mixins/flexbox' as *;
 @use 'mixins/sizes_positions' as *;
+@use 'mixins/breakpoints' as *;
 
 .login__page {
     @include flexbox(center, center, column);
@@ -10,6 +11,10 @@
         margin-bottom: 0.7rem;
         font-family: var(--text-font);
         color: var(--white-text);
+
+        @include responsivo('celular'){
+            text-align: center;
+        }
     }
 
     p {
@@ -17,6 +22,10 @@
         margin-bottom: 2rem;
         font-family: var(--text-font-secundary);
         color: var(--white-text);
+        
+        @include responsivo('celular'){
+            text-align: center;
+        }
     }
 }
 

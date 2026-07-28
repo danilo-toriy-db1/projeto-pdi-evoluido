@@ -1,5 +1,6 @@
 @use 'mixins/flexbox' as *;
 @use 'mixins/sizes_positions' as *;
+@use 'mixins/breakpoints' as *;
 
 .login__modal[open]{
     @include flexbox(center, center, column);
@@ -11,6 +12,10 @@
     padding: 5rem;
     gap: 2rem;
     background: var(--background-main);
+
+    @include responsivo('celular'){
+        padding: 2rem;
+    }
 
     .close__container{
         position: absolute;
