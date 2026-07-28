@@ -80,26 +80,6 @@
     }
 }
 
-.button__excludeHability{
-    display: none;
-    position: absolute;
-    border: none;
-    background-color: red;
-    border-radius: 0.25rem;
-    cursor: pointer;
-}
-
-.hard-skill .button__excludeHability{
-    @include sizes_positions($top: -0.7rem, $right: -0.7rem);
-}
-
-.soft-skill .button__excludeHability{
-    @include sizes_positions($top: -0.7rem, $right: -0.7rem);
-}
-
-.modo-exclusao .button__excludeHability{
-    display: flex;
-}
 
 .button__container{
     @include flexbox($justify: space-evenly, $direction: row);
@@ -137,8 +117,3 @@
     margin-right: 0.5rem;
 }
 
-.selecionado-exclusao{
-    background-color: rgb(235, 101, 101);
-    border-radius: 0.5rem;
-    border: red solid 0.2rem;
-}

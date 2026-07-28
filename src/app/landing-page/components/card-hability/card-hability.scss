@@ -11,6 +11,10 @@
     100% { width: 3.8rem; }
 }
 
+@keyframes linha_galho_mobile{
+    100% { width: 1.9rem; }
+}
+
 @keyframes pintar_card_soft{
     100% { background-color: var(--soft-skill-background);
            border-color: var(--soft-skill-border); }
@@ -78,6 +82,10 @@
         border-top: var(--dashed-line-color) dashed 0.15rem;
         animation: linha_galho var(--duration-animation-linha-galho) ease-in-out forwards;
         animation-delay: var(--delay-galho-animation);
+
+        @include responsivo('celular'){
+            animation: linha_galho_mobile var(--duration-animation-linha-galho) ease-in-out forwards;
+        }
     }
 
     &::after{
