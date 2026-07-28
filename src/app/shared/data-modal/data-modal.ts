@@ -15,6 +15,7 @@ export class DataModal {
   dataForm!: FormGroup;
   dadoRecebido = input<AboutPersonalDataShared | null>();
   private modal = viewChild<ElementRef<HTMLDialogElement>>('dataModal');
+  private primeiraRenderizacaoFlag: boolean = true;
 
   constructor(private fb: FormBuilder,
               private aboutMeDataService: AboutMeDataService
@@ -32,10 +33,16 @@ export class DataModal {
       const dados = this.dadoRecebido();
 
       if(!dados){
-        console.error('Erro ao buscar os dados pessoais');
+        if(!this.primeiraRenderizacaoFlag){
+          console.error('Erro ao buscar os dados pessoais');
+          return;
+        }
+
+        this.primeiraRenderizacaoFlag = false;
         return;
       }
 
+      this.primeiraRenderizacaoFlag = false;
       this.dataForm.patchValue({
         nome: dados.nome,
         idade: dados.idade,

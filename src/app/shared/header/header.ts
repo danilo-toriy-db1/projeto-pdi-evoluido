@@ -23,7 +23,6 @@ export class Header {
   admin = signal<boolean>(false);
   tema = signal<string>('light');
   dadosHeader = computed<HeaderAnchorsModel[]>(() => {
-    console.log(this.isLoginPage());
     if(this.isLoginPage()){
       return [];
     }
@@ -53,7 +52,6 @@ export class Header {
   }
 
   trocarPagina(pagina: string){
-    console.log(pagina);
     this.dadosHeader().forEach((dado) => {
       dado.active = (dado.name === pagina);
     });

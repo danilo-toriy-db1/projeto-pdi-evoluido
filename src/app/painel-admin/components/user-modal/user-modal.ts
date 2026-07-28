@@ -16,6 +16,7 @@ export class UserModal {
   usuarioSelecionado = input<Users | null>();
   modoCadastro = input<boolean>();
   private modal = viewChild<ElementRef<HTMLDialogElement>>('userEditModal');
+  private primeiraRenderizacaoFlag: boolean = true;
   protected readonly roles = Roles;
 
   constructor(private fb: FormBuilder,
@@ -32,10 +33,16 @@ export class UserModal {
       const user = this.usuarioSelecionado();
 
       if(!this.usuarioSelecionado()){
-        console.error('Não foi possível capturar os dados do usuário selecionado');
+        if(!this.primeiraRenderizacaoFlag){
+          console.error('Não foi possível capturar os dados do usuário selecionado');
+          return;
+        }
+
+        this.primeiraRenderizacaoFlag = false;
         return;
       }
 
+      this.primeiraRenderizacaoFlag = false;
       if(this.modoCadastro()){
         this.configModalAdicionar();
         return;
