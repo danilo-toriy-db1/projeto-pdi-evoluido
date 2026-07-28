@@ -1,9 +1,9 @@
 import { Component, effect, input, output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LocalStorageService } from '../../../services/local-storage.service/local-storage.service';
 import { AuthService } from '../../../auth/auth.service/auth.service';
 import { Router } from '@angular/router';
 import { Roles } from '../../../models/enums/roles';
+import { UserService } from '../../../services/user.service/user.service';
 
 @Component({
   selector: 'app-login-form',
@@ -19,7 +19,7 @@ export class LoginForm {
   constructor(private readonly fb: FormBuilder,
               private auth: AuthService,
               private router: Router,
-              private localStorageService: LocalStorageService
+              private userService: UserService
   ) {
     this.loginForm = this.fb.group({
       usuario: ['', [Validators.required]],
@@ -70,16 +70,17 @@ export class LoginForm {
       return;
     }
 
-    const usuarios = this.localStorageService.get('users');
     const novoUsuario = {
+      id: 0,
       user: user,
       password: password,
       role: role === 'user'
             ? Roles.USUARIO
             : Roles.ADMIN
     }
-    usuarios.push(novoUsuario)
-    this.localStorageService.post('users', usuarios);
+
+    this.userService.postUser(novoUsuario);
+
     alert('Usuário criado com sucesso. Basta realizar o login!');
     this.formSucesso.emit();
   }
@@ -91,8 +92,4 @@ export class LoginForm {
       this.loginForm.removeControl('role');
     }
   }
-
-  
-
-  
 }

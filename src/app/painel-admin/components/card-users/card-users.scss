@@ -1,11 +1,12 @@
 @use 'mixins/breakpoints' as *;
 @use 'mixins/sizes_positions' as *; 
+@use 'mixins/flexbox' as *;
+@use 'mixins/grid' as *;
 
-table {
-    box-shadow: 0.6rem 0.5rem 1rem 0.5rem var(--card-box-shadow);
-    color: var(--gray-text);
+.container__card{
+    @include flexbox(flex-start, center, column);
     background-color: var(--color-card);
-    font-family: var(--text-font-secundary);
+    box-shadow: 0.6rem 0.5rem 1rem 0.5rem var(--card-box-shadow);
     border: solid 0.25rem;
     border-radius: 3rem;
 
@@ -26,16 +27,50 @@ table {
         margin: 1.5rem 0 1.5rem 0;
     }
 
-    th, td{
-        text-align: center;
+    table {
+        @include sizes_positions($width: 100%, $height: max-content);
+        color: var(--gray-text);
         font-family: var(--text-font-secundary);
+
+        tr {
+            @include grid($column: repeat(4, 1fr));
+        }
+
+        .table__data{
+            &:hover{
+                cursor: pointer;
+                background-color: var(--hover-edit);
+            }
+        }
+    
+        th, td{
+            height: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            font-family: var(--text-font-secundary);
+        }
+    
+        th {
+            font-size: 2rem;
+        }
+    
+        td {
+            font-size: 1.25rem;
+        }
     }
 
-    th {
-        font-size: 2rem;
-    }
+    .add__user{
+        @include flexbox($align: center, $justify: center, $direction: column);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem 4rem 1.5rem 4rem;
+        border-radius: 1rem;
+        background-color: var(--card-edit);
+        margin: 2rem 2rem 0.5rem 2rem;
 
-    td {
-        font-size: 1.25rem;
+        &:hover {
+            background-color: var(--hover-edit);
+            cursor: pointer;
+            transform: scale(1.1);
+        }
     }
 }

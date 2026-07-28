@@ -10,11 +10,12 @@ import { ReactiveFormsModule, ɵInternalFormsSharedModule } from '@angular/forms
 import { EditModal } from '../shared/edit-modal/edit-modal';
 import { EditUserPage } from './pages/edit-user-page/edit-user-page';
 import { CardUsers } from './components/card-users/card-users';
+import { UserModal } from './components/user-modal/user-modal';
 
 const routes: Routes = [{ path: '', component: PainelAdmin }];
 
 @NgModule({
-  declarations: [InitialPage, EditPage, PainelAdmin, EditUserPage, CardUsers],
+  declarations: [InitialPage, EditPage, PainelAdmin, EditUserPage, CardUsers, UserModal],
   imports: [
     CommonModule,
     CardInitialPage,

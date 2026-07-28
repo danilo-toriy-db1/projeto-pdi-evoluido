@@ -282,11 +282,13 @@ export class DadosMock {
   ]
 
   users: Users[] = [
-    { user: 'admin',
+    { id: 0,
+      user: 'admin',
       password: '123@',
       role: Roles.ADMIN
     },
-    { user: 'user',
+    { id: 1,
+      user: 'user',
       password: '123U',
       role: Roles.USUARIO
     }

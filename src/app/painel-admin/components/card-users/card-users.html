@@ -1,20 +1,26 @@
-<table>
-    <thead>
-        <tr>
-            <th>ID: </th>
-            <th>Usuário: </th>
-            <th>Senha: </th>
-            <th>Nível de Acesso: </th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (usuario of usuarios(); track $index) {
+<div class="container__card">
+    <table>
+        <thead>
             <tr>
-                <td>{{ $index }}</td>
-                <td>{{ usuario.user }}</td>
-                <td>{{ usuario.password }}</td>
-                <td>{{ usuario.role }}</td>
+                <th>ID: </th>
+                <th>Usuário: </th>
+                <th>Senha: </th>
+                <th>Nível de Acesso: </th>
             </tr>
-        }
-    </tbody>    
-</table>
+        </thead>
+        <tbody>
+            @for (usuario of usuarios(); track $index) {
+                <tr class="table__data" (click)="abrirModal(usuario)">
+                    <td>{{ usuario.id }}</td>
+                    <td>{{ usuario.user }}</td>
+                    <td>{{ usuario.password }}</td>
+                    <td>{{ usuario.role }}</td>
+                </tr>
+            }
+        </tbody>    
+    </table>
+    <img src="assets/icons/black-add-icon.svg" alt="Ícone de adição de habilidades" class="add__user"
+    (click)="abrirModalAdicionar()">
+</div>
+
+<app-user-modal [usuarioSelecionado]="usuarioSelecionado()" [modoCadastro]="modoCadastro()" />
