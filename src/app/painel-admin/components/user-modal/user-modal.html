@@ -9,11 +9,14 @@
     (ngSubmit)="modoCadastro() 
                 ? adicionarUsuario()
                 : enviarDados()">
+
         <label for="input__texto" id="label__select"> Usuário: </label>
         <input type="text" formControlName="username" id="input__username">
 
+
         <label for="input__password"> Senha: </label>
         <input type="text" formControlName="password" id="input__password">
+
 
         @if (modoCadastro()) {
             <label for="confirm__password">Repita a Senha:</label>

@@ -24,7 +24,7 @@ const routes: Routes = [{ path: '', component: PainelAdmin }];
     EditModal,
     RouterModule.forChild(routes),
     ɵInternalFormsSharedModule,
-  ],
+],
   exports: [PainelAdmin],
 })
 export class PainelAdminModule {}

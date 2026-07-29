@@ -3,6 +3,12 @@
 @use 'mixins/grid' as *;
 @use 'mixins/breakpoints' as *;
 
+:host {
+  display: block; 
+  width: 100vw;
+  min-height: 87vh;
+}
+
 app-card-about-me{
     max-height: 10%;
 }
@@ -29,7 +35,8 @@ app-card-about-me{
     }
 
     @include responsivo('tablet'){
-        @include grid($column: repeat(3, minmax(10rem, 1fr)));
+        @include grid($column: repeat(3, minmax(8rem, 1fr)));
+        @include sizes_positions($width: 85%);
         gap: 1.5rem;
     }
 

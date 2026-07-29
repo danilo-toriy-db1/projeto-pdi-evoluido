@@ -3,6 +3,18 @@
 @use 'mixins/flexbox' as *;
 @use 'mixins/grid' as *;
 
+:host{
+    @include flexbox(center, center, column);
+
+    @include responsivo('tablet'){
+        margin-top: 7rem;
+    }
+
+    @include responsivo('celular'){
+        margin-top: 5rem;
+    }
+}
+
 .container__card{
     @include flexbox(flex-start, center, column);
     background-color: var(--color-card);
@@ -12,19 +24,16 @@
 
     @include responsivo('computador'){
         @include sizes_positions($width: 100%, $height: max-content);
-        min-height: 100%;
+        min-height: 65vh;
     }
 
     @include responsivo('tablet'){
-        @include sizes_positions($width: 75%, $height: max-content);
-        
-        min-height: 75%;
+        @include sizes_positions($width: 90%, $height: max-content);
+        min-height: 50vh;
     }
 
     @include responsivo('celular'){
-        @include sizes_positions($width: 85%, $height: fit-content);
-        min-height: 60%;
-        margin: 1.5rem 0 1.5rem 0;
+        @include sizes_positions($width: 95dvw, $height: fit-content);
     }
 
     table {
@@ -34,6 +43,7 @@
 
         tr {
             @include grid($column: repeat(4, 1fr));
+            align-items: center;
         }
 
         .table__data{
@@ -44,18 +54,32 @@
         }
     
         th, td{
-            height: 1rem;
             padding: 1.5rem;
             text-align: center;
             font-family: var(--text-font-secundary);
+
+            @include responsivo('celular'){
+                padding: 1rem;
+            }
         }
     
         th {
             font-size: 2rem;
+            margin-bottom: 1rem;
+            vertical-align: middle;
+            text-align: center;
+
+            @include responsivo('celular'){
+                font-size: 1.05rem;
+            }
         }
     
         td {
             font-size: 1.25rem;
+
+            @include responsivo('celular'){
+                font-size: 0.9rem;
+            }
         }
     }
 

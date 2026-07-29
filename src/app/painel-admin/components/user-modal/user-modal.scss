@@ -1,6 +1,7 @@
 @use 'mixins/flexbox' as *;
 @use 'mixins/sizes_positions' as *;
 @use 'mixins/grid' as *;
+@use 'mixins/breakpoints' as *;
 
 .userEdit__modal[open]{
     @include flexbox(center, center, column);
@@ -12,6 +13,10 @@
     padding: 5rem;
     gap: 2rem;
     background-color: var(--container-background);
+
+    @include responsivo('celular'){
+        padding: 2rem;
+    }
 
     .close__container{
         position: absolute;
@@ -40,8 +45,11 @@
     }
 
     form {
-        row-gap: 0.25rem;
-        column-gap: 1rem;
+        @include flexbox($direction: column);
+
+        @include responsivo('tablet'){
+            @include flexbox($direction: column);
+        }
 
         input{
             padding: 0.75rem 1rem 0.75rem 1rem;
@@ -70,19 +78,18 @@
 
         label{
             font-size: 1.75rem;
-            margin-bottom: 2rem;
+            margin: 0.5rem 0 0.5rem 0;
             justify-self: center;
             font-family: var(--text-font);
             color: var(--gray-text);
+
+            @include responsivo('celular'){
+                font-size: 1.25rem;
+            }
         }
 
         #label__select{
-            font-size: 1.5rem;
-            justify-self: center;
-            margin-bottom: 0;
             margin-top: 2rem;
-            font-family: var(--text-font);
-            color: var(--gray-text);
         }
     }
 
@@ -107,6 +114,7 @@
 
         .btn__submit{
             background-color: #150a30;
+            margin-top: 3rem;
         }
     
         .btn__reset{
