@@ -17,6 +17,7 @@ export class Header {
 
   private router = inject(Router);
   private localStorageService = inject(LocalStorageService);
+  expand = signal<boolean>(false);
 
   isLoginPage = input<boolean>();
   paginaSelecionada = output<string>();
@@ -44,6 +45,10 @@ export class Header {
     this.router.events.subscribe(() => {
       this.admin.set(this.router.url.includes('/admin'))
     })
+  }
+
+  toggleExpand(){
+    this.expand.set(!this.expand());
   }
 
   getTheme(){

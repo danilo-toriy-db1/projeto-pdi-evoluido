@@ -1,31 +1,34 @@
-<header id="cabecalho">
-    <nav id="navbar">
-        <div class="menu__container">
-            <span>Fechar Menu</span>
-            <a id="navbar__menu"></a>
+<div [class]="expand() ? 'expanded' : '' ">
+    <a id="navbar__menu--collapsed" (click)="toggleExpand()" aria-label="Abrir menu"></a>
+    <header id="cabecalho">
+        <nav id="navbar">
+            <div class="menu__container">
+                <span>Fechar Menu</span>
+                <a id="navbar__menu" (click)="toggleExpand()"></a>
+            </div>
+            @for (anchor of dadosHeader(); track $index) {
+                <a [id]="anchor.id"
+                [ngClass]="anchor.active ? 'active' : 'desactive'"
+                (click)="trocarPagina(anchor.name)">
+                    {{ anchor.content }}
+                </a>
+            }
+        </nav>    
+
+        <div id="button__container">
+            <button id="themeButton" (click)="getTheme()">
+                <img [src]="tema() === 'light'
+                                ? '/assets/icons/light-mode.svg'
+                                : '/assets/icons/dark-mode.svg'" 
+                alt="Ícone do modo atual da página" id="img-theme">
+            </button>
+            <button id="logoutButton" (click)="logout()">
+                <img [src]="tema() === 'dark'
+                                ? '/assets/icons/logout-icon.svg'
+                                : '/assets/icons/black-logout-icon.svg'" 
+                alt="Ícone de logout">
+            </button>
         </div>
-        @for (anchor of dadosHeader(); track $index) {
-            <a [id]="anchor.id"
-               [ngClass]="anchor.active ? 'active' : 'desactive'"
-               (click)="trocarPagina(anchor.name)">
-                {{ anchor.content }}
-            </a>
-        }
-    </nav>    
 
-    <div id="button__container">
-        <button id="themeButton" (click)="getTheme()">
-            <img [src]="tema() === 'light'
-                            ? '/assets/icons/light-mode.svg'
-                            : '/assets/icons/dark-mode.svg'" 
-            alt="Ícone do modo atual da página" id="img-theme">
-        </button>
-        <button id="logoutButton" (click)="logout()">
-            <img [src]="tema() === 'dark'
-                            ? '/assets/icons/logout-icon.svg'
-                            : '/assets/icons/black-logout-icon.svg'" 
-            alt="Ícone de logout">
-        </button>
-    </div>
-
-</header>
+    </header>
+</div>

@@ -3,6 +3,15 @@
 @use 'mixins/grid' as *;
 @use 'mixins/sizes_positions' as *;
 
+:host{
+    @include responsivo('celular'){
+        @include grid($column: auto 1fr, $area: "cabecalho main"
+                                                "cabecalho rodape"
+                     );
+        overflow-x: hidden;
+    }
+}
+
 #cabecalho{
     background-color: var(--background-header);
     min-height: 2.15rem;
@@ -26,6 +35,19 @@
         transform: translateX(-100%);
         transition: transform 0.2s ease-in-out;
         z-index: 10;
+    }
+}
+
+.expanded{
+    @include responsivo('celular'){
+        #navbar__menu--collapsed{
+            display: none;
+        }
+    
+        #cabecalho{
+            transform: translateX(0);
+            height: 100%;
+        }
     }
 }
 
@@ -85,14 +107,52 @@
 
 #navbar__menu--collapsed {
     display: none;
+
+    @include responsivo('celular'){
+        grid-area: main;
+        background-image: url("/assets/icons/menu.svg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        @include flexbox($align: flex-start, $justify: flex-start);
+        @include sizes_positions($width: 1.75rem, $height: 1.75rem);
+        margin: 0.5rem 0 0 0.75rem;
+        z-index: 99;
+    }
 }
 
 #navbar__menu{
     display: none;
+
+    @include responsivo('celular'){
+        background-image: url("/assets/icons/menu.svg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        align-self: self-end;
+        margin: 0;
+        width: 1.5rem;
+        height: 1.5rem;
+    }
 }
 
 .menu__container{
     display: none;
+
+    @include responsivo('celular'){
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+
+
+        span{
+            display: flex;
+            justify-self: flex-end;
+            align-items: center;
+            font-size: 0.5rem;
+            font-family: var(--text-font-secundary);
+            color: var(--white-text);
+        }
+    }
 }
 
 #initial__page{
@@ -123,9 +183,7 @@
     }
 
     @include responsivo('celular'){
-        margin: 2rem 0 0 0;
-        display: flex;
-        align-self: center;
+        margin: 4rem 2.5rem 0 0;
     }
 
     &:hover{
@@ -142,6 +200,12 @@
             border-radius: 1rem;
             padding: 0.35rem;
             font-size: 0.85rem;
+
+            @include responsivo('celular'){
+                @include sizes_positions($width:max-content, $top: 90%, $left: -50%, $right: 0);
+                padding: 0.35rem;
+                font-size: 0.5rem;
+            }
         }
     }
 }
@@ -162,9 +226,7 @@
     }
 
     @include responsivo('celular'){
-        margin: 2rem 0 0 0;
-        display: flex;
-        align-self: center;
+        margin: 4rem 0 0 2.5rem;
     }
 
     &:hover{
@@ -181,6 +243,12 @@
             border-radius: 1rem;
             padding: 0.35rem;
             font-size: 0.85rem;
+
+            @include responsivo('celular'){
+                @include sizes_positions($width:max-content, $top: 90%, $left: -50%, $right: 0);
+                padding: 0.35rem;
+                font-size: 0.5rem;
+            }
         }
     }
 }
