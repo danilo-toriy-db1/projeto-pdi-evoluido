@@ -1,9 +1,9 @@
 import { Component, effect, input, output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../auth/auth.service/auth.service';
-import { Router } from '@angular/router';
 import { Roles } from '../../../models/enums/roles';
 import { UserService } from '../../../services/user.service/user.service';
+import { FormFeedbackOutput } from '../../../models/enums/form-feedback-output';
 
 @Component({
   selector: 'app-login-form',
@@ -14,11 +14,10 @@ import { UserService } from '../../../services/user.service/user.service';
 export class LoginForm {
   loginForm!: FormGroup;
   cadastro = input<boolean>(false);
-  formSucesso = output<void>();
+  formEmitter = output<FormFeedbackOutput>();
 
   constructor(private readonly fb: FormBuilder,
               private auth: AuthService,
-              private router: Router,
               private userService: UserService
   ) {
     this.loginForm = this.fb.group({
@@ -45,12 +44,11 @@ export class LoginForm {
     const login = this.auth.login(user, password);
 
     if(login){
-      this.formSucesso.emit();
       this.auth.getRole() === Roles.ADMIN 
-        ?  this.router.navigate(['/admin'])
-        :  this.router.navigate(['/login']);
+        ?  this.formEmitter.emit(FormFeedbackOutput.SUCCESS)
+        :  this.formEmitter.emit(FormFeedbackOutput.FORBIDDEN);
     } else {
-      alert('Credenciais inválidas!')
+      this.formEmitter.emit(FormFeedbackOutput.MISMATCH)
     }
   }
 
@@ -82,7 +80,7 @@ export class LoginForm {
     this.userService.postUser(novoUsuario);
 
     alert('Usuário criado com sucesso. Basta realizar o login!');
-    this.formSucesso.emit();
+    this.formEmitter.emit(FormFeedbackOutput.SUCCESS);
   }
 
   resetModal(){

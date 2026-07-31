@@ -5,6 +5,12 @@
         </button>
     </div>
     
-    <app-login-form [cadastro]="cadastro()" (formSucesso)="fecharModal()"/>
+    @if(!mostraFeedback){
+        <app-login-form [cadastro]="cadastro()" (formEmitter)="aguardar($event)"/>
+    }
+
+    @if (mostraFeedback) {
+        <app-visual-feedback-modal [estado]="statusModal()" [mensagem]="mensagemFeedback() || '' "/>
+    }
     
 </dialog>

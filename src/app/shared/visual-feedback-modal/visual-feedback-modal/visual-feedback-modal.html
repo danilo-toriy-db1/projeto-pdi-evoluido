@@ -1,0 +1,24 @@
+<div class="visual__feedback--container">
+    @switch (estado()) {
+        @case ('sucesso') {
+            <div class="wrapper">
+                <div class="success"> ✓ </div>
+                <h3>{{ mensagem() || 'Sucesso!' }}</h3>
+            </div>
+        }
+
+        @case ('carregando') {
+            <div class="wrapper">
+                <div class="loading"></div>
+                <h3>{{ mensagem() || 'Carregando...'}}</h3>
+            </div>
+        }
+
+        @case ('erro') {
+            <div class="wrapper">
+                <div class="error"> ✕ </div>
+                <h3>{{ mensagem() || 'Ops... Algo deu errado' }}</h3>
+            </div>
+        }
+    }
+</div>

@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginPage } from './login-page/login-page';
 import { LoginModal } from './components/login-modal/login-modal';
 import { LoginForm } from './components/login-form/login-form';
+import { VisualFeedbackModal } from "../shared/visual-feedback-modal/visual-feedback-modal/visual-feedback-modal";
 
 const routes: Routes = [
   { path: '', component: LoginPage }
@@ -19,8 +20,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes)
-  ],
+    RouterModule.forChild(routes),
+    VisualFeedbackModal
+],
   exports: [LoginPage],
 })
 export class LoginPageModule {}

@@ -1,0 +1,46 @@
+@use 'mixins/flexbox' as *;
+
+@keyframes girar{
+    0% { transform: rotate(0deg) }
+    100% { transform: rotate(360deg) }
+}
+
+.visual__feedback--container{
+    @include flexbox(center, center, column);
+
+    .wrapper{
+        @include flexbox(center, center, column);
+        margin-top: 4rem;
+        gap: 10rem;
+
+        h3 {
+            font-size: 2rem;
+            font-family: var(--text-font-secundary);
+            text-align: center;
+            color: var(--white-text);
+        }
+    }
+
+    .loading{
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        border: 0.35rem solid;
+        border-color: var(--gray-text) var(--gray-text) var(--gray-text) transparent;
+        animation: girar 2s linear infinite;
+    }
+
+    .success{
+        width: 3rem;
+        height: 3rem;
+        font-size: 4rem;
+        color: var(--gray-text);
+    }
+
+    .error{
+        width: 3rem;
+        height: 3rem;
+        font-size: 4rem;
+        color: var(--gray-text);
+    }
+}
