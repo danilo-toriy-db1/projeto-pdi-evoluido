@@ -40,7 +40,7 @@ export class LoginModal {
     this.modal()?.nativeElement.close();
   }
 
-  async aguardar(emitter: FormFeedbackOutput){
+  async aguardarFeedback(emitter: FormFeedbackOutput){
     this.mostraFeedback = true;
     this.statusModal.set('carregando');
     await this.aguardarSegundos(5000);
@@ -77,17 +77,6 @@ export class LoginModal {
 
     this.mostraFeedback = false;
     this.mensagemFeedback.set('');
-    this.fecharModal();
-  }
-
-  async aguardarErro(){
-    this.mostraFeedback = true;
-    this.statusModal.set('erro');
-    this.mensagemFeedback.set('Credenciais Inválidas!');
-    await this.aguardarSegundos(4000);
-
-    this.mostraFeedback = false;
-    this.router.navigate(['/login']);
     this.fecharModal();
   }
 

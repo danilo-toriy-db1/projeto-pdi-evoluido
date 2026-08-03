@@ -1,6 +1,6 @@
 import { Component, effect, signal, viewChild } from '@angular/core';
 import { Users } from '../../../models/users';
-import { UserModal } from '../user-modal/user-modal';
+import { UserModal } from '../../../shared/user-modal/user-modal';
 import { UserService } from '../../../services/user.service/user.service';
 
 @Component({

@@ -5,40 +5,48 @@
         </button>
     </div>
 
-    <form [formGroup]="editForm" 
-    (ngSubmit)="adicionaHabilidade() 
-                    ? adicionarHabilidade()
-                    : enviarDados()">
-        <label for="input__texto"> 
-            {{ grupoCard() === 'dados' 
-                    ? 'Dados: '
-                    : 'Habilidade: ' }}
-        </label>
-        <input type="text" formControlName="campoTexto" id="input__texto">
-
-        @if (editForm.contains('tipo')) {
-            <label for="select__tipo" id="label__select">
-                Selecione o Tipo da Habilidade:
+    @if (!mostraFeedback){
+        <form [formGroup]="editForm" 
+        (ngSubmit)="adicionaHabilidade() 
+                        ? adicionarHabilidade()
+                        : enviarDados()">
+            <label for="input__texto"> 
+                {{ grupoCard() === 'dados' 
+                        ? 'Dados: '
+                        : 'Habilidade: ' }}
             </label>
-            <select formControlName="tipo" id="select__tipo">
-                <option value="" disabled>Selecione um tipo...</option>
-                <option value="soft">Soft-Skill</option>
-                <option value="hard">Hard-Skill</option>
-            </select>
-        }
+            <input type="text" formControlName="campoTexto" id="input__texto">
+    
+            @if (editForm.contains('tipo')) {
+                <label for="select__tipo" id="label__select">
+                    Selecione o Tipo da Habilidade:
+                </label>
+                <select formControlName="tipo" id="select__tipo">
+                    <option value="" disabled>Selecione um tipo...</option>
+                    <option value="soft">Soft-Skill</option>
+                    <option value="hard">Hard-Skill</option>
+                </select>
+            }
+    
+            <div class="btn__container">
+                <button class="btn__submit" type="submit">Salvar Alterações</button>
+                <button class="btn__reset" (click)="fecharModal()">Cancelar</button>
+            </div>
+    
+            <button class="btn__delete" type="button"
+            (click)="grupoCard() === 'habilidade'
+                        ? removerHabilidade()
+                        : removerDados()">
+                <span>Deletar</span> 
+                <img src="assets/icons/delete-icon.svg" alt="Ícone de Lixeira" id="trash__icon">
+            </button>
+    
+        </form>
+    }
 
-        <div class="btn__container">
-            <button class="btn__submit" type="submit">Salvar Alterações</button>
-            <button class="btn__reset" (click)="fecharModal()">Cancelar</button>
-        </div>
 
-        <button class="btn__delete" type="button"
-        (click)="grupoCard() === 'habilidade'
-                    ? removerHabilidade()
-                    : removerDados()">
-            <span>Deletar</span> 
-            <img src="assets/icons/delete-icon.svg" alt="Ícone de Lixeira" id="trash__icon">
-        </button>
-
-    </form>
+    @if (mostraFeedback) {
+        <app-visual-feedback-modal [estado]="statusModal()" [mensagem]="mensagemFeedback() || '' "/>
+    }
 </dialog>
+

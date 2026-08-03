@@ -1,14 +1,17 @@
-import { Component, effect, ElementRef, input, viewChild } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Users } from '../../../models/users';
-import { Roles } from '../../../models/enums/roles';
-import { UserService } from '../../../services/user.service/user.service';
+import { Component, effect, ElementRef, input, signal, viewChild } from '@angular/core';
+import { FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Users } from '../../models/users';
+import { Roles } from '../../models/enums/roles';
+import { UserService } from '../../services/user.service/user.service';
+import { FormFeedbackOutput } from '../../models/enums/form-feedback-output';
+import { VisualFeedbackModal } from "../visual-feedback-modal/visual-feedback-modal/visual-feedback-modal";
 
 @Component({
   selector: 'app-user-modal',
-  standalone: false,
   templateUrl: './user-modal.html',
   styleUrl: './user-modal.scss',
+  standalone: true,
+    imports: [ReactiveFormsModule, VisualFeedbackModal]
 })
 export class UserModal {
   
@@ -18,6 +21,9 @@ export class UserModal {
   private modal = viewChild<ElementRef<HTMLDialogElement>>('userEditModal');
   private primeiraRenderizacaoFlag: boolean = true;
   protected readonly roles = Roles;
+  mostraFeedback = false;
+  statusModal = signal<string>('');
+  mensagemFeedback = signal<string>('');
 
   constructor(private fb: FormBuilder,
               private userService: UserService
@@ -59,10 +65,14 @@ export class UserModal {
   }
 
   abrirModal(){
+    this.mostraFeedback = false;
+    this.statusModal.set('');
     this.modal()?.nativeElement.showModal();
   }
 
   fecharModal(){
+    this.mostraFeedback = false;
+    this.statusModal.set('');
     this.modal()?.nativeElement.close();
   }
 
@@ -80,14 +90,14 @@ export class UserModal {
       role: this.userEditForm.get('role')?.value
     }
     
+    this.aguardarFeedback(FormFeedbackOutput.SUCCESS, 'Usuário atualizado com Sucesso!');
     this.userService.updateUser(usuarioAtualizado);
-    this.fecharModal();
   }
 
   removerUsuario(){
     const usuario = this.usuarioSelecionado() as Users;
     this.userService.deleteUserById(usuario);
-    this.fecharModal();
+    this.aguardarFeedback(FormFeedbackOutput.SUCCESS, 'Usuário removido com Sucesso!');
   }
 
   adicionarUsuario(){
@@ -101,12 +111,45 @@ export class UserModal {
     const confirm = this.userEditForm.get('confirm')?.value;
 
     if(novoUsuario.password !== confirm){
-      alert('A confirmação de senha está incorreta!');
-      this.fecharModal();
+      this.aguardarFeedback(FormFeedbackOutput.MISMATCH, 'As senhas não coincidem');
       return;
     }
 
+    this.aguardarFeedback(FormFeedbackOutput.SUCCESS, 'Usuário Adicionado com Sucesso!');
     this.userService.postUser(novoUsuario);
+  }
+
+  async aguardarFeedback(status: FormFeedbackOutput, mensagem?: string){
+    this.mostraFeedback = true;
+    this.statusModal.set('carregando');
+    await this.aguardarSegundos(5000);
+
+    if(mensagem){
+      this.mensagemFeedback.set(mensagem);
+    }
+
+    switch (status) {
+      case FormFeedbackOutput.SUCCESS:
+        this.statusModal.set('sucesso');
+        await this.aguardarSegundos(3000);
+        break;
+      
+      case FormFeedbackOutput.MISMATCH:
+        this.statusModal.set('erro');
+        await this.aguardarSegundos(4000);
+        break;
+      
+      default:
+        this.statusModal.set('erro');
+        await this.aguardarSegundos(4000);
+        break;
+    }
+    this.mostraFeedback = false;
+    this.mensagemFeedback.set('');
     this.fecharModal();
+  }
+
+  private aguardarSegundos(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }

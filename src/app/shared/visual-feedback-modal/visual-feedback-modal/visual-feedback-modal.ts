@@ -5,6 +5,7 @@ import { Component, input } from '@angular/core';
   imports: [],
   templateUrl: './visual-feedback-modal.html',
   styleUrl: './visual-feedback-modal.scss',
+  standalone: true
 })
 export class VisualFeedbackModal {
 

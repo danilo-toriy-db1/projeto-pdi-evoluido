@@ -6,14 +6,15 @@ import { AboutMeDataService } from '../../services/about-me-data-service/about-m
 import { HabilitiesModel } from '../../models/habilities.model';
 import { TipoHabilidade } from '../../models/enums/tipo-habilidade';
 import { AboutDataShared } from '../../models/about-data-shared.model';
-import { AboutPersonalDataShared } from '../../models/about-personal-data-shared';
+import { FormFeedbackOutput } from '../../models/enums/form-feedback-output';
+import { VisualFeedbackModal } from "../visual-feedback-modal/visual-feedback-modal/visual-feedback-modal";
 
 @Component({
   selector: 'app-edit-modal',
   templateUrl: './edit-modal.html',
   styleUrl: './edit-modal.scss',
   standalone: true,
-    imports: [ReactiveFormsModule]
+    imports: [ReactiveFormsModule, VisualFeedbackModal]
 })
 export class EditModal{
 
@@ -22,6 +23,9 @@ export class EditModal{
   dadoRecebido = input<ArrayHabilitiesModel | AboutDataShared | null>();
   adicionaHabilidade = signal<boolean>(false);
   private modal = viewChild<ElementRef<HTMLDialogElement>>('editModal');
+  mostraFeedback = false;
+  statusModal = signal<string>('');
+  mensagemFeedback = signal<string>('');
 
   constructor(private fb: FormBuilder,
               private habilitiesDataService: HabilitiesDataService,
@@ -66,17 +70,23 @@ export class EditModal{
   }
 
   abrirModal(){
+    this.statusModal.set('');
+    this.mostraFeedback = false;
     this.modal()?.nativeElement.showModal();
   }
 
   abrirModalAdicionar(){
-    this.adicionaHabilidade.set(true)
+    this.adicionaHabilidade.set(true);
+    this.statusModal.set('');
+    this.mostraFeedback = false;
     this.modal()?.nativeElement.showModal();
   }
 
   fecharModal(){
     this.modal()?.nativeElement.close();
     this.adicionaHabilidade.set(false);
+    this.mostraFeedback = false;
+    this.statusModal.set('');
     if(this.editForm.contains('tipo')){
       this.editForm.removeControl('tipo');
     }
@@ -92,8 +102,8 @@ export class EditModal{
           habilidade: this.editForm.get('campoTexto')?.value
         }
       }
+      this.aguardarFeedback(FormFeedbackOutput.SUCCESS, 'Habilidade Atualizada com Sucesso!');
       this.habilitiesDataService.updateHabilities(dadosAtualizados);
-      console.log(dadoAntigo);
     } else {
         const dadoAntigo = this.dadoRecebido() as AboutDataShared;
         const dadosAtualizados: AboutDataShared = {
@@ -101,9 +111,9 @@ export class EditModal{
           dado: this.editForm.get('campoTexto')?.value,
           campo: dadoAntigo.campo
         }
+        this.aguardarFeedback(FormFeedbackOutput.SUCCESS, 'Dado Atualizado com Sucesso!');
         this.aboutMeDataService.updateDescriptionData(dadosAtualizados);
     }
-    this.fecharModal();
   }
 
   configModalAdicionar(){
@@ -121,18 +131,47 @@ export class EditModal{
     }
     this.habilitiesDataService.postHabilities(novaHabilidade);
 
-    this.fecharModal();
+    this.aguardarFeedback(FormFeedbackOutput.SUCCESS, 'Habilidade Adicionada com Sucesso!');
   }
 
   removerHabilidade(){
     const hability = this.dadoRecebido() as ArrayHabilitiesModel;
     this.habilitiesDataService.deleteHabilityById(hability);
-    this.fecharModal();
+    this.aguardarFeedback(FormFeedbackOutput.SUCCESS, 'Habilidade Deletada com Sucesso!')
   }
 
   removerDados(){
     const data = this.dadoRecebido() as AboutDataShared;
     this.aboutMeDataService.deleteDescriptionContent(data.id, data.campo);
+    this.aguardarFeedback(FormFeedbackOutput.SUCCESS, 'Dado resetado com Sucesso!');
+  }
+
+  async aguardarFeedback(status: FormFeedbackOutput, mensagem?: string){
+    this.mostraFeedback = true;
+    this.statusModal.set('carregando');
+    await this.aguardarSegundos(5000);
+
+    switch (status) {
+      case FormFeedbackOutput.SUCCESS:
+        if(mensagem){
+          this.mensagemFeedback.set(mensagem);
+        }
+        this.statusModal.set('sucesso');
+        await this.aguardarSegundos(3000);
+        break;
+      
+      default:
+        this.statusModal.set('erro');
+        await this.aguardarSegundos(4000);
+        break;
+    }
+
+    this.mostraFeedback = false;
+    this.mensagemFeedback.set('');
     this.fecharModal();
+  }
+
+  private aguardarSegundos(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }

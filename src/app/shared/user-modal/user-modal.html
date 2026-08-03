@@ -1,0 +1,50 @@
+<dialog #userEditModal class="userEdit__modal">
+    <div class="close__container">
+        <button id="close__button" (click)="fecharModal()">
+            <img src="/assets/icons/close-icon.svg" alt="Ícone do botão de fechar">
+        </button>
+    </div>
+
+    @if (!mostraFeedback) {
+        <form [formGroup]="userEditForm"
+        (ngSubmit)="modoCadastro() 
+                    ? adicionarUsuario()
+                    : enviarDados()">
+    
+            <label for="input__texto" id="label__select"> Usuário: </label>
+            <input type="text" formControlName="username" id="input__username">
+    
+    
+            <label for="input__password"> Senha: </label>
+            <input type="text" formControlName="password" id="input__password">
+    
+    
+            @if (modoCadastro()) {
+                <label for="confirm__password">Repita a Senha:</label>
+                <input type="text" formControlName="confirm" id="confirm__password">
+            }
+    
+            <label for="select__role"> Nível de Acesso: </label>
+            <select id="select__role" formControlName="role">
+                <option value="" disabled>Selecione o nível...</option>
+                <option [value]="roles.USUARIO" >Usuário Padrão</option>
+                <option [value]="roles.ADMIN">Admin</option>
+            </select>
+    
+            <div class="btn__container">
+                <button class="btn__submit" type="submit">Salvar Alterações</button>
+                <button class="btn__reset" (click)="fecharModal()">Cancelar</button>
+            </div>
+    
+            <button class="btn__delete" type="button" (click)="removerUsuario()">
+                <span>Deletar Usuário</span> 
+                <img src="assets/icons/delete-icon.svg" alt="Ícone de Lixeira" id="trash__icon">
+            </button>
+    
+        </form>
+    }
+
+    @if (mostraFeedback) {
+        <app-visual-feedback-modal [estado]="statusModal()" [mensagem]="mensagemFeedback() || '' "/>
+    }
+</dialog>

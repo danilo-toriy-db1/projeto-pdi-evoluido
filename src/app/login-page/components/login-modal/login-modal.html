@@ -6,7 +6,7 @@
     </div>
     
     @if(!mostraFeedback){
-        <app-login-form [cadastro]="cadastro()" (formEmitter)="aguardar($event)"/>
+        <app-login-form [cadastro]="cadastro()" (formEmitter)="aguardarFeedback($event)"/>
     }
 
     @if (mostraFeedback) {
