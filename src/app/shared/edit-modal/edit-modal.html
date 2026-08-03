@@ -17,7 +17,7 @@
             </label>
             <input type="text" formControlName="campoTexto" id="input__texto">
     
-            @if (editForm.contains('tipo')) {
+            @if (grupoCard() === 'habilidade') {
                 <label for="select__tipo" id="label__select">
                     Selecione o Tipo da Habilidade:
                 </label>
@@ -30,7 +30,7 @@
     
             <div class="btn__container">
                 <button class="btn__submit" type="submit">Salvar Alterações</button>
-                <button class="btn__reset" (click)="fecharModal()">Cancelar</button>
+                <button class="btn__reset" type="button" (click)="fecharModal()">Cancelar</button>
             </div>
     
             <button class="btn__delete" type="button"

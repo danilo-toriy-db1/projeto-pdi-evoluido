@@ -1,10 +1,11 @@
-import { Component, effect, ElementRef, input, signal, viewChild } from '@angular/core';
+import { Component, effect, ElementRef, inject, input, viewChild } from '@angular/core';
 import { FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Users } from '../../models/users';
 import { Roles } from '../../models/enums/roles';
 import { UserService } from '../../services/user.service/user.service';
 import { FormFeedbackOutput } from '../../models/enums/form-feedback-output';
 import { VisualFeedbackModal } from "../visual-feedback-modal/visual-feedback-modal/visual-feedback-modal";
+import { RenderizaFeedbackService } from '../../services/renderiza-feedback.service/renderiza-feedback.service';
 
 @Component({
   selector: 'app-user-modal',
@@ -14,6 +15,8 @@ import { VisualFeedbackModal } from "../visual-feedback-modal/visual-feedback-mo
     imports: [ReactiveFormsModule, VisualFeedbackModal]
 })
 export class UserModal {
+
+  private renderizaFeedbackService = inject(RenderizaFeedbackService);
   
   userEditForm!: FormGroup;
   usuarioSelecionado = input<Users | null>();
@@ -22,8 +25,8 @@ export class UserModal {
   private primeiraRenderizacaoFlag: boolean = true;
   protected readonly roles = Roles;
   mostraFeedback = false;
-  statusModal = signal<string>('');
-  mensagemFeedback = signal<string>('');
+  statusModal = this.renderizaFeedbackService.statusModal;
+  mensagemFeedback = this.renderizaFeedbackService.mensagemFeedback;
 
   constructor(private fb: FormBuilder,
               private userService: UserService
@@ -66,13 +69,11 @@ export class UserModal {
 
   abrirModal(){
     this.mostraFeedback = false;
-    this.statusModal.set('');
     this.modal()?.nativeElement.showModal();
   }
 
   fecharModal(){
     this.mostraFeedback = false;
-    this.statusModal.set('');
     this.modal()?.nativeElement.close();
   }
 
@@ -121,35 +122,9 @@ export class UserModal {
 
   async aguardarFeedback(status: FormFeedbackOutput, mensagem?: string){
     this.mostraFeedback = true;
-    this.statusModal.set('carregando');
-    await this.aguardarSegundos(5000);
+    await this.renderizaFeedbackService.gerarModalFeedback(status, mensagem);
 
-    if(mensagem){
-      this.mensagemFeedback.set(mensagem);
-    }
-
-    switch (status) {
-      case FormFeedbackOutput.SUCCESS:
-        this.statusModal.set('sucesso');
-        await this.aguardarSegundos(3000);
-        break;
-      
-      case FormFeedbackOutput.MISMATCH:
-        this.statusModal.set('erro');
-        await this.aguardarSegundos(4000);
-        break;
-      
-      default:
-        this.statusModal.set('erro');
-        await this.aguardarSegundos(4000);
-        break;
-    }
     this.mostraFeedback = false;
-    this.mensagemFeedback.set('');
     this.fecharModal();
-  }
-
-  private aguardarSegundos(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }

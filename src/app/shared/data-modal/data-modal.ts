@@ -1,9 +1,10 @@
-import { Component, effect, ElementRef, input, signal, viewChild } from '@angular/core';
+import { Component, effect, ElementRef, inject, input, signal, viewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AboutPersonalDataShared } from '../../models/about-personal-data-shared';
 import { AboutMeDataService } from '../../services/about-me-data-service/about-me-data-service';
 import { FormFeedbackOutput } from '../../models/enums/form-feedback-output';
 import { VisualFeedbackModal } from "../visual-feedback-modal/visual-feedback-modal/visual-feedback-modal";
+import { RenderizaFeedbackService } from '../../services/renderiza-feedback.service/renderiza-feedback.service';
 
 @Component({
   selector: 'app-data-modal',
@@ -14,13 +15,15 @@ import { VisualFeedbackModal } from "../visual-feedback-modal/visual-feedback-mo
 })
 export class DataModal {
 
+  private renderizaFeedbackService = inject(RenderizaFeedbackService)
+
   dataForm!: FormGroup;
   dadoRecebido = input<AboutPersonalDataShared | null>();
   private modal = viewChild<ElementRef<HTMLDialogElement>>('dataModal');
   private primeiraRenderizacaoFlag: boolean = true;
   mostraFeedback = false;
-  statusModal = signal<string>('');
-  mensagemFeedback = signal<string>('');
+  statusModal = this.renderizaFeedbackService.statusModal;
+  mensagemFeedback = this.renderizaFeedbackService.mensagemFeedback;
 
   constructor(private fb: FormBuilder,
               private aboutMeDataService: AboutMeDataService
@@ -60,13 +63,11 @@ export class DataModal {
 
   abrirModal(){
     this.mostraFeedback = false;
-    this.statusModal.set('');
     this.modal()?.nativeElement.showModal();
   }
 
   fecharModal(){
     this.mostraFeedback = false;
-    this.statusModal.set('');
     this.modal()?.nativeElement.close();
   }
 
@@ -86,30 +87,9 @@ export class DataModal {
 
   async aguardarFeedback(status: FormFeedbackOutput, mensagem?: string){
     this.mostraFeedback = true;
-    this.statusModal.set('carregando');
-    await this.aguardarSegundos(5000);
-
-    switch (status) {
-      case FormFeedbackOutput.SUCCESS:
-        if(mensagem){
-          this.mensagemFeedback.set(mensagem);
-        }
-        this.statusModal.set('sucesso');
-        await this.aguardarSegundos(3000);
-        break;
-      
-      default:
-        this.statusModal.set('erro');
-        await this.aguardarSegundos(4000);
-        break;
-    }
+    await this.renderizaFeedbackService.gerarModalFeedback(status, mensagem);
 
     this.mostraFeedback = false;
-    this.mensagemFeedback.set('');
     this.fecharModal();
-  }
-
-  private aguardarSegundos(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }

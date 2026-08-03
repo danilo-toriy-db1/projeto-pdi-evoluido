@@ -22,6 +22,6 @@ export class EditPage {
 
     abrirModalAdicionar(){
       this.cardData.set(null);
-      this.modalRef()?.abrirModalAdicionar();
+      this.modalRef()?.abrirModal(true);
     }
 }

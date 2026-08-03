@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef, input, OnInit, signal, viewChild } from '@angular/core';
+import { Component, effect, ElementRef, inject, input, OnInit, signal, viewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ArrayHabilitiesModel } from '../../models/array-habilities.model';
 import { HabilitiesDataService } from '../../services/habilities-data.service/habilities-data.service';
@@ -8,6 +8,7 @@ import { TipoHabilidade } from '../../models/enums/tipo-habilidade';
 import { AboutDataShared } from '../../models/about-data-shared.model';
 import { FormFeedbackOutput } from '../../models/enums/form-feedback-output';
 import { VisualFeedbackModal } from "../visual-feedback-modal/visual-feedback-modal/visual-feedback-modal";
+import { RenderizaFeedbackService } from '../../services/renderiza-feedback.service/renderiza-feedback.service';
 
 @Component({
   selector: 'app-edit-modal',
@@ -18,21 +19,24 @@ import { VisualFeedbackModal } from "../visual-feedback-modal/visual-feedback-mo
 })
 export class EditModal{
 
+  private renderizaFeedbackService = inject(RenderizaFeedbackService);
   editForm!: FormGroup;
   grupoCard = input<'habilidade' | 'dados'>();
   dadoRecebido = input<ArrayHabilitiesModel | AboutDataShared | null>();
   adicionaHabilidade = signal<boolean>(false);
   private modal = viewChild<ElementRef<HTMLDialogElement>>('editModal');
   mostraFeedback = false;
-  statusModal = signal<string>('');
-  mensagemFeedback = signal<string>('');
+
+  statusModal = this.renderizaFeedbackService.statusModal;
+  mensagemFeedback = this.renderizaFeedbackService.mensagemFeedback;
 
   constructor(private fb: FormBuilder,
               private habilitiesDataService: HabilitiesDataService,
               private aboutMeDataService: AboutMeDataService
   ){
     this.editForm = this.fb.group({
-      campoTexto: ['']
+      campoTexto: [''],
+      tipo: ['']
     });
 
     effect(() => {
@@ -45,14 +49,13 @@ export class EditModal{
 
       switch (this.grupoCard()) {
         case 'habilidade':
-          if(this.adicionaHabilidade()){
-            this.configModalAdicionar();
-            return;
-          }
-
+          this.abrirModal(true);
           const dadosHabilidades = dados as ArrayHabilitiesModel;
           this.editForm.patchValue({
-            campoTexto : dadosHabilidades.habilidade.habilidade
+            campoTexto : dadosHabilidades.habilidade.habilidade,
+            tipo: dadosHabilidades.habilidade.tipo === TipoHabilidade.SOFT
+                  ? 'soft'
+                  : 'hard' 
           });
           break;
 
@@ -69,16 +72,12 @@ export class EditModal{
     })
   }
 
-  abrirModal(){
-    this.statusModal.set('');
+  abrirModal(adicionar?: boolean){
     this.mostraFeedback = false;
-    this.modal()?.nativeElement.showModal();
-  }
-
-  abrirModalAdicionar(){
-    this.adicionaHabilidade.set(true);
-    this.statusModal.set('');
-    this.mostraFeedback = false;
+    if(adicionar){
+      this.adicionaHabilidade.set(true);
+    }
+    
     this.modal()?.nativeElement.showModal();
   }
 
@@ -86,10 +85,6 @@ export class EditModal{
     this.modal()?.nativeElement.close();
     this.adicionaHabilidade.set(false);
     this.mostraFeedback = false;
-    this.statusModal.set('');
-    if(this.editForm.contains('tipo')){
-      this.editForm.removeControl('tipo');
-    }
   }
 
   enviarDados(){
@@ -116,11 +111,6 @@ export class EditModal{
     }
   }
 
-  configModalAdicionar(){
-    this.editForm.reset();
-    this.editForm.addControl('tipo', this.fb.control(''));
-    this.abrirModalAdicionar();
-  }
 
   adicionarHabilidade(){
     const novaHabilidade: HabilitiesModel = {
@@ -148,30 +138,10 @@ export class EditModal{
 
   async aguardarFeedback(status: FormFeedbackOutput, mensagem?: string){
     this.mostraFeedback = true;
-    this.statusModal.set('carregando');
-    await this.aguardarSegundos(5000);
-
-    switch (status) {
-      case FormFeedbackOutput.SUCCESS:
-        if(mensagem){
-          this.mensagemFeedback.set(mensagem);
-        }
-        this.statusModal.set('sucesso');
-        await this.aguardarSegundos(3000);
-        break;
-      
-      default:
-        this.statusModal.set('erro');
-        await this.aguardarSegundos(4000);
-        break;
-    }
+    await this.renderizaFeedbackService.gerarModalFeedback(status, mensagem);
 
     this.mostraFeedback = false;
-    this.mensagemFeedback.set('');
     this.fecharModal();
   }
 
-  private aguardarSegundos(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
 }
