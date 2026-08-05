@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PaginaAtualState } from '../../../services/troca-pagina';
+import { PaginaAtualState } from '../../../services/troca-pagina/troca-pagina';
 
 @Component({
   selector: 'app-initial-page',

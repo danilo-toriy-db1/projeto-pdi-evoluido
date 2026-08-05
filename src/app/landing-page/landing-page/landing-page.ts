@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { PaginaAtualState } from '../../services/troca-pagina';
+import { PaginaAtualState } from '../../services/troca-pagina/troca-pagina';
 
 
 @Component({

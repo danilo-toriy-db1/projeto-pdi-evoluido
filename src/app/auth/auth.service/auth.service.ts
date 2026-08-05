@@ -59,4 +59,8 @@ export class AuthService {
   getRole(): Roles{
     return this.userRole();
   }
+
+  getAuthentication(): boolean{
+    return this.isAuthenticated();
+  } 
 }

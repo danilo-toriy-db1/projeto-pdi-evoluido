@@ -42,3 +42,7 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Project documentation generated during validation
+/ARQUITETURA-UML.puml
+/RESUMO-CONCEITOS-ANGULAR.md

@@ -2,7 +2,7 @@ import { Component, effect, inject, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Footer } from "./shared/footer/footer";
 import { Header } from "./shared/header/header";
-import { PaginaAtualState } from './services/troca-pagina';
+import { PaginaAtualState } from './services/troca-pagina/troca-pagina';
 import { MudaTema } from './services/muda-tema/muda-tema';
 import { toSignal } from '@angular/core/rxjs-interop';
 

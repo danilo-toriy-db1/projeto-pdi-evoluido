@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { MudaTema } from '../../services/muda-tema/muda-tema';
 import { LocalStorageService } from '../../services/local-storage.service/local-storage.service';
 import { AuthService } from '../../auth/auth.service/auth.service';
-import { PaginaAtualState } from '../../services/troca-pagina';
+import { PaginaAtualState } from '../../services/troca-pagina/troca-pagina';
 
 @Component({
   selector: 'app-header',
