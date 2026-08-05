@@ -1,15 +1,14 @@
 import { inject, Injectable } from '@angular/core';
-import type { AboutModel } from '../../models/about.model.js'
-import type { InitialPageCardsModel } from '../../models/initial-page-cards.model.js';
-import { ArrayHabilitiesModel } from '../../models/array-habilities.model.js';
-import { TipoHabilidade } from '../../models/enums/tipo-habilidade.js';
-import { contactPageModel } from '../../models/contact-page.model.js';
-import { TipoContactPage } from '../../models/enums/tipo-contact-page.js';
-import { HeaderAnchorsModel } from '../../models/header-anchors.model.js';
-import { LocalStorageService } from '../local-storage.service/local-storage.service.js';
-import { Users } from '../../models/users.js';
-import { Roles } from '../../models/enums/roles.js';
-import { ArrayAboutModel } from '../../models/array-about.model.js';
+import type { InitialPageCardsModel } from '../../models/initial-page-cards.model';
+import { ArrayHabilitiesModel } from '../../models/array-habilities.model';
+import { TipoHabilidade } from '../../models/enums/tipo-habilidade';
+import { contactPageModel } from '../../models/contact-page.model';
+import { TipoContactPage } from '../../models/enums/tipo-contact-page';
+import { HeaderAnchorsModel } from '../../models/header-anchors.model';
+import { LocalStorageService } from '../local-storage.service/local-storage.service';
+import { Users } from '../../models/users';
+import { Roles } from '../../models/enums/roles';
+import { ArrayAboutModel } from '../../models/array-about.model';
 
 
 @Injectable({
@@ -297,9 +296,6 @@ export class DadosMock {
   constructor(){
     if(!this.localStorageService.get('habilities')){
       this.localStorageService.post('habilities', this.habilities);
-    }
-    if(!this.localStorageService.get('personalData')){
-      this.localStorageService.post('personalData', this.about);
     }
     if(!this.localStorageService.get('users')){
       this.localStorageService.post('users', this.users);
