@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PaginaAtualState } from '../../../services/troca-pagina/troca-pagina';
+import { PagesNames } from '../../../models/enums/pages-names';
 
 @Component({
   selector: 'app-initial-page',
@@ -21,6 +22,6 @@ export class InitialPage {
       return;
     }
 
-    this.paginaAtualState.trocaPagina('dataEdit');
+    this.paginaAtualState.trocaPagina(PagesNames.EDIT_DATA_PAGE);
   }
 }

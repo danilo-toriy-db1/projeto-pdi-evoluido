@@ -1,17 +1,17 @@
 @switch (paginaAtual()) {
-    @case ('home') {
+    @case (PagesNames.INITIAL_PAGE) {
         <app-initial-page />
     }
 
-    @case ('about') {
+    @case (PagesNames.ABOUT_ME_PAGE) {
         <app-about-me-page />
     }
 
-    @case('habilities'){
+    @case(PagesNames.HABILITIES_PAGE){
         <app-habilities-page />
     }
 
-    @case('contact'){
+    @case(PagesNames.CONTACT_PAGE){
         <app-contact-page />
     }
 }

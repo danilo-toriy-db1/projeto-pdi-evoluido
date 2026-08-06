@@ -1,13 +1,13 @@
 @switch (paginaAtual()) {
-    @case ('home') {
+    @case (PagesNames.INITIAL_PAGE) {
         <app-initial-page />
     }
 
-    @case ('dataEdit') {
+    @case (PagesNames.EDIT_DATA_PAGE) {
         <app-edit-page />
     }
 
-    @case ('usersEdit') {
+    @case (PagesNames.USER_EDIT_PAGE) {
         <app-edit-user-page />
     }
 }
