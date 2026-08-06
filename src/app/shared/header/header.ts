@@ -60,7 +60,13 @@ export class Header {
 
   getTheme(){
     this.mudaTema.alternarTema();
-    this.tema.set(this.localStorageService.get('tema'));
+    const tema = this.localStorageService.get<string>('tema');
+    if(!tema){
+      console.error('Não foi possível acessar o tema salvo no LocalStorage');
+      return;
+    }
+
+    this.tema.set(tema);
   }
 
   trocarPagina(pagina: string){

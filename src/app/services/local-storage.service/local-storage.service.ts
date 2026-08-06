@@ -5,19 +5,20 @@ import { Injectable } from '@angular/core';
 })
 export class LocalStorageService {
   
-  get(chave: string): any {
+  get<T>(chave: string): T | null {
     try {
       const dado = localStorage.getItem(chave);
       if(dado){
-        return JSON.parse(dado);
+        return JSON.parse(dado) as T;
       }
       return null;
     } catch (erro: any) {
       console.error('Erro ao buscar o item no LocalStorage: ', erro);
+      return null;
     }
   }
 
-  post(chave: string, valor: any): any{
+  post<T>(chave: string, valor: T): void{
     try {
       const dado = JSON.stringify(valor);
       localStorage.setItem(chave, dado);

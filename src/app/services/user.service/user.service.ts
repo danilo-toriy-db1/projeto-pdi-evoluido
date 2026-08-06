@@ -15,12 +15,12 @@ export class UserService {
   constructor(private localStorageService: LocalStorageService,
               private dados: DadosMock
   ){
-      const dadosLocal = this.localStorageService.get('users');
+      const dadosLocal = this.localStorageService.get<Users[]>('users');
       if(dadosLocal && dadosLocal.length > 0 ){
         this.usuarios.set(dadosLocal);
       }else{
         this.usuarios.set(this.dados.users);
-        this.localStorageService.post('users', this.dados.users)
+        this.localStorageService.post<Users[]>('users', this.dados.users)
       }
   }
 
@@ -35,7 +35,7 @@ export class UserService {
       
     });
   
-      this.localStorageService.post('users', userUpdated);
+      this.localStorageService.post<Users[]>('users', userUpdated);
       this.usuarios.set(userUpdated);
     }
   
@@ -51,7 +51,7 @@ export class UserService {
     }
 
     usuarios.push(novoUsuario)
-    this.localStorageService.post('users', usuarios);
+    this.localStorageService.post<Users[]>('users', usuarios);
     this.usuarios.set(usuarios);
   }
   
@@ -68,7 +68,7 @@ export class UserService {
     }
 
     usuarios.splice(arrayIndex, 1);
-    this.localStorageService.post('users', usuarios);
+    this.localStorageService.post<Users[]>('users', usuarios);
   }
 
   getNextId(usuarios: Users[]): number {

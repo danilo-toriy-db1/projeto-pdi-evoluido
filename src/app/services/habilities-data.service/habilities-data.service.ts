@@ -15,12 +15,12 @@ export class HabilitiesDataService {
   constructor(private localStorageService: LocalStorageService,
               private dados: DadosMock
   ){
-      const dadosLocal = this.localStorageService.get('habilities');
+      const dadosLocal = this.localStorageService.get<ArrayHabilitiesModel[]>('habilities');
       if(dadosLocal && dadosLocal.length > 0 ){
         this.habilities.set(dadosLocal);
       }else{
         this.habilities.set(this.dados.habilities);
-        this.localStorageService.post('habilities', this.dados.habilities)
+        this.localStorageService.post<ArrayHabilitiesModel[]>('habilities', this.dados.habilities)
       }
   }
 
@@ -35,7 +35,7 @@ export class HabilitiesDataService {
       
     });
 
-    this.localStorageService.post('habilities', habilitiesUpdated);
+    this.localStorageService.post<ArrayHabilitiesModel[]>('habilities', habilitiesUpdated);
     this.habilities.set(habilitiesUpdated);
   }
 
@@ -47,7 +47,7 @@ export class HabilitiesDataService {
     }
 
     habilidades.push(novaHabilidade);
-    this.localStorageService.post('habilities', habilidades);
+    this.localStorageService.post<ArrayHabilitiesModel[]>('habilities', habilidades);
     this.habilities.set(habilidades);
   }
 
@@ -64,7 +64,7 @@ export class HabilitiesDataService {
     }
 
     habilities.splice(arrayIndex, 1);
-    this.localStorageService.post('habilities', habilities);
+    this.localStorageService.post<ArrayHabilitiesModel[]>('habilities', habilities);
     this.habilities.set(habilities);
   }
 

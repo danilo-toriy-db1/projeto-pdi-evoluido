@@ -9,15 +9,15 @@ export class MudaTema {
   darkMode = signal<boolean>(false);
 
   constructor(private localStorage: LocalStorageService){
-    if(!localStorage.get('tema')){
+    if(!localStorage.get<string>('tema')){
       this.darkMode.set(true);
-      localStorage.post('tema', 'dark');
+      localStorage.post<string>('tema', 'dark');
     }
   }
 
   alternarTema(){
     this.darkMode.update(tema => !tema);
-    this.localStorage.post('tema', this.darkMode() ? 'dark' : 'light');
+    this.localStorage.post<string>('tema', this.darkMode() ? 'dark' : 'light');
   }
 
 }

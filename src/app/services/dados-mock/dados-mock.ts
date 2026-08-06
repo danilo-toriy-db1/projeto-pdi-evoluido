@@ -294,10 +294,10 @@ export class DadosMock {
   ]
 
   constructor(){
-    if(!this.localStorageService.get('users')){
-      this.localStorageService.post('users', this.users);
-      this.localStorageService.post('activeSession', false);
-      this.localStorageService.post('activeUserRole', Roles.USUARIO);
+    if(!this.localStorageService.get<Users[]>('users')){
+      this.localStorageService.post<Users[]>('users', this.users);
+      this.localStorageService.post<boolean>('activeSession', false);
+      this.localStorageService.post<Roles>('activeUserRole', Roles.USUARIO);
     }
   }
 }

@@ -15,11 +15,11 @@ export class AuthService {
   }
 
   private activeSession(){
-    const activeSession = this.localStorageService.get('activeSession');
+    const activeSession = this.localStorageService.get<boolean>('activeSession');
     if(activeSession === true){
       this.isAuthenticated.set(true);
 
-      const activeUserRole = this.localStorageService.get('activeUserRole');
+      const activeUserRole = this.localStorageService.get<Roles>('activeUserRole');
       if(activeUserRole === Roles.ADMIN || activeUserRole === Roles.USUARIO){
         this.userRole.set(activeUserRole);
       }
@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   login(user: string, password: string): boolean{
-    const dadosLocal = this.localStorageService.get('users') as Users[] | null;
+    const dadosLocal = this.localStorageService.get<Users[]>('users');
     if(!dadosLocal){
       return false;
     }
@@ -38,8 +38,8 @@ export class AuthService {
     if(usuarioEncontrado){
       this.isAuthenticated.set(true);
       this.userRole.set(usuarioEncontrado.role);
-      this.localStorageService.post('activeSession', true);
-      this.localStorageService.post('activeUserRole', usuarioEncontrado.role);
+      this.localStorageService.post<boolean>('activeSession', true);
+      this.localStorageService.post<Roles>('activeUserRole', usuarioEncontrado.role);
       return true;
     }
     return false;
@@ -48,8 +48,8 @@ export class AuthService {
   logout(){
     this.isAuthenticated.set(false);
     this.userRole.set(Roles.USUARIO);
-    this.localStorageService.post('activeSession', false);
-    this.localStorageService.post('activeUserRole', null);
+    this.localStorageService.post<boolean>('activeSession', false);
+    this.localStorageService.post<null>('activeUserRole', null);
   }
 
   haveLogin(): boolean{

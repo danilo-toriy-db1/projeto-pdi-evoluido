@@ -16,12 +16,12 @@ export class AboutMeDataService {
   constructor(private localStorageService: LocalStorageService,
               private dados: DadosMock
   ){
-      const dadosLocal = this.localStorageService.get('personalData');
+      const dadosLocal = this.localStorageService.get<ArrayAboutModel[]>('personalData');
       if(dadosLocal && dadosLocal.length > 0 ){
         this.dadosAboutMe.set(dadosLocal);
       }else{
         this.dadosAboutMe.set(this.dados.about);
-        this.localStorageService.post('personalData', this.dados.about)
+        this.localStorageService.post<ArrayAboutModel[]>('personalData', this.dados.about)
       }
   }
 
@@ -50,7 +50,7 @@ export class AboutMeDataService {
       });
     });
 
-    this.localStorageService.post('personalData', this.dadosAboutMe());
+    this.localStorageService.post<ArrayAboutModel[]>('personalData',this.dadosAboutMe()!);
   }
 
   deleteDescriptionContent(id: number, campo: string){
@@ -78,7 +78,7 @@ export class AboutMeDataService {
       });
     });
 
-    this.localStorageService.post('personalData', this.dadosAboutMe());
+    this.localStorageService.post<ArrayAboutModel[]>('personalData', this.dadosAboutMe()!);
   }
 
   updatePersonalData(dado: AboutPersonalDataShared){
@@ -109,7 +109,7 @@ export class AboutMeDataService {
       });
     });
 
-    this.localStorageService.post('personalData', this.dadosAboutMe());
+    this.localStorageService.post<ArrayAboutModel[]>('personalData', this.dadosAboutMe()!);
   }
 
 }
