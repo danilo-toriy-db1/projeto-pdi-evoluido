@@ -76,6 +76,8 @@ export class EditModal{
     this.mostraFeedback = false;
     if(adicionar){
       this.adicionaHabilidade.set(true);
+      this.modal()?.nativeElement.showModal();
+      return;
     }
     this.adicionaHabilidade.set(false);
     this.modal()?.nativeElement.showModal();

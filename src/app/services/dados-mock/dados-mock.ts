@@ -5,7 +5,6 @@ import { TipoHabilidade } from '../../models/enums/tipo-habilidade';
 import { contactPageModel } from '../../models/contact-page.model';
 import { TipoContactPage } from '../../models/enums/tipo-contact-page';
 import { HeaderAnchorsModel } from '../../models/header-anchors.model';
-import { LocalStorageService } from '../local-storage.service/local-storage.service';
 import { Users } from '../../models/users';
 import { Roles } from '../../models/enums/roles';
 import { ArrayAboutModel } from '../../models/array-about.model';
@@ -15,8 +14,6 @@ import { ArrayAboutModel } from '../../models/array-about.model';
   providedIn: 'root',
 })
 export class DadosMock {
-
-  localStorageService = inject(LocalStorageService);
 
   headerAnchorContent: HeaderAnchorsModel[] = [
     {
@@ -292,12 +289,4 @@ export class DadosMock {
       role: Roles.USUARIO
     }
   ]
-
-  constructor(){
-    if(!this.localStorageService.get<Users[]>('users')){
-      this.localStorageService.post<Users[]>('users', this.users);
-      this.localStorageService.post<boolean>('activeSession', false);
-      this.localStorageService.post<Roles>('activeUserRole', Roles.USUARIO);
-    }
-  }
 }

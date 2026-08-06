@@ -4,7 +4,7 @@ import { Footer } from "./shared/footer/footer";
 import { Header } from "./shared/header/header";
 import { PaginaAtualState } from './services/troca-pagina/troca-pagina';
 import { MudaTema } from './services/muda-tema/muda-tema';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { PagesNames } from './models/enums/pages-names';
 
 @Component({
   selector: 'app-root',
@@ -36,7 +36,7 @@ export class App {
     })
   }
 
-  trocaPagina(pagina: string){
+  trocaPagina(pagina: PagesNames){
     this.paginaAtualState.trocaPagina(pagina);
   }
 

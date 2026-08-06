@@ -20,7 +20,9 @@ export class UserService {
         this.usuarios.set(dadosLocal);
       }else{
         this.usuarios.set(this.dados.users);
-        this.localStorageService.post<Users[]>('users', this.dados.users)
+        this.localStorageService.post<Users[]>('users', this.dados.users);
+        this.localStorageService.post<boolean>('activeSession', false);
+        this.localStorageService.post<Roles>('activeUserRole', Roles.USUARIO);
       }
   }
 
@@ -71,7 +73,7 @@ export class UserService {
     this.localStorageService.post<Users[]>('users', usuarios);
   }
 
-  getNextId(usuarios: Users[]): number {
+  private getNextId(usuarios: Users[]): number {
     const novoId = usuarios.reduce((maiorId, usuarioAtual) => {
       return usuarioAtual.id > maiorId
               ? usuarioAtual.id

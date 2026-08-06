@@ -47,8 +47,8 @@ export class HabilitiesDataService {
     }
 
     habilidades.push(novaHabilidade);
-    this.localStorageService.post<ArrayHabilitiesModel[]>('habilities', habilidades);
     this.habilities.set(habilidades);
+    this.localStorageService.post<ArrayHabilitiesModel[]>('habilities', habilidades);
   }
 
   deleteHabilityById(hability: ArrayHabilitiesModel){
