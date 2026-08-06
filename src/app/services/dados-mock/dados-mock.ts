@@ -294,9 +294,6 @@ export class DadosMock {
   ]
 
   constructor(){
-    if(!this.localStorageService.get('habilities')){
-      this.localStorageService.post('habilities', this.habilities);
-    }
     if(!this.localStorageService.get('users')){
       this.localStorageService.post('users', this.users);
       this.localStorageService.post('activeSession', false);

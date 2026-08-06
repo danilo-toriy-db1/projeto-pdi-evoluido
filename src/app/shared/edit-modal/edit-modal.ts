@@ -77,7 +77,7 @@ export class EditModal{
     if(adicionar){
       this.adicionaHabilidade.set(true);
     }
-    
+    this.adicionaHabilidade.set(false);
     this.modal()?.nativeElement.showModal();
   }
 
@@ -93,8 +93,10 @@ export class EditModal{
       const dadosAtualizados: ArrayHabilitiesModel = {
         id: dadoAntigo?.id,
         habilidade: {
-          ...dadoAntigo?.habilidade,
-          habilidade: this.editForm.get('campoTexto')?.value
+          habilidade: this.editForm.get('campoTexto')?.value,
+          tipo: this.editForm.get('tipo')?.value === 'soft'
+                  ? TipoHabilidade.SOFT
+                  : TipoHabilidade.HARD 
         }
       }
       this.aguardarFeedback(FormFeedbackOutput.SUCCESS, 'Habilidade Atualizada com Sucesso!');

@@ -50,7 +50,7 @@ describe('AboutMeDataService', () => {
       expect(localStorageServiceGetSpy).toHaveBeenCalledWith('personalData');
       expect(localStorageServicePostSpy).toHaveBeenCalledWith('personalData', serviceDadosMock.about);
     })
-  })
+  });
 
   describe('Teste da lógica de atualização de dados e delete', () => {
     beforeEach(() => {

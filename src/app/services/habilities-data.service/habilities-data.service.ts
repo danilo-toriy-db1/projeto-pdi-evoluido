@@ -65,9 +65,10 @@ export class HabilitiesDataService {
 
     habilities.splice(arrayIndex, 1);
     this.localStorageService.post('habilities', habilities);
+    this.habilities.set(habilities);
   }
 
-  getNextId(): number {
+  private getNextId(): number {
     const novoId = this.habilities().reduce((maiorId, habilidadeAtual) => {
       return habilidadeAtual.id > maiorId
               ? habilidadeAtual.id
