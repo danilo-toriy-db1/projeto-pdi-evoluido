@@ -25,13 +25,17 @@ export class RenderizaFeedbackService {
 
       case FormFeedbackOutput.FORBIDDEN:
         this.statusModal.set('erro');
-        this.mensagemFeedback.set('Acesso Negado!');
+        if(this.mensagemFeedback() === ''){
+          this.mensagemFeedback.set('Acesso Negado!');
+        }
         await this.aguardarSegundos(4000);
         break;
       
       case FormFeedbackOutput.MISMATCH:
         this.statusModal.set('erro');
-        this.mensagemFeedback.set('Credenciais Inválidas!');
+        if(this.mensagemFeedback() === ''){
+          this.mensagemFeedback.set('Credenciais Inválidas!');
+        }
         await this.aguardarSegundos(4000);
         break;
       
